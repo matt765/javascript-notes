@@ -2,4 +2,4 @@ Javascript knowledge library I've made for myself while learning Javascript. It'
 
 Live link https://matt765.github.io/javascript-notes/
 
-It's in polish language
+It's mostly in polish language

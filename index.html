@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="scripts.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+  <link href="prism.css" rel="stylesheet" />
+  <script src="prism.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="navigation-container">
+    <div class="navigation">
+      <a href="#start">Start</a>
+      <a href="#1">1. Funkcje</a>
+      <a href="#2">2. Obiekty</a>
+      <a href="#3">3. Map & Set</a>
+      <a href="#4">4. DOM</a>
+      <a href="#5">5. Formularze</a>
+      <a href="#6">6. AJAX</a>
+      <a href="#7">7. Asynchroniczność</a>
+      <a href="#8">8. Destructuring</a>
+      <a href="#9">9. Wzorce projektowe</a>
+      <a href="#10">10. FP</a>
+      <a href="#11">11. Storage & Cookies </a>
+      <a href="#12">12. Testing</a>
+      <a href="#13">13. Iteratory i generatory </a>
+      <a href="#14">14. Moduły </a>
+      <a href="#15">15. Wydajny kod </a>
+      <a href="#16">16. Różne </a>
+    </div>
+    <span class="title" id="start">
+      <h1> Javascript</h1>
+    </span>
+
+
+  </div>
+  <div class="text-container">
+    <div class="text-box links" style="display:none">
+      <a
+        href="https://www.codecademy.com/learn/introduction-to-javascript/modules/learn-javascript-arrays/cheatsheet">Tablice</a>
+      <a
+        href="https://www.codecademy.com/learn/introduction-to-javascript/modules/learn-javascript-loops/cheatsheet">Pętle</a>
+
+      <a href="https://websitesetup.org/javascript-cheat-sheet/">Typy danych</a>
+      <a href="https://www.w3schools.com/js/js_let.asp">Zmienne</a>
+      <a
+        href="https://www.codecademy.com/learn/introduction-to-javascript/modules/learn-javascript-control-flow/cheatsheet">Instrukcje
+        warunkowe</a>
+      <a
+        href="https://www.codecademy.com/learn/introduction-to-javascript/modules/learn-javascript-scope/cheatsheet">Zakres</a>
+
+    </div>
+
+
+
+
+
+
+    <div class="text-box" id="1">
+      <h2> 1. Funkcje</h2>
+
+      <h3>Rekurencja</h3>
+      <ul>
+        <li> Rekurencja to odwoływanie się funkcji do samej siebie </li>
+        <li> Może zastąpić np. używanie pętli for, przyśpieszając pracę kodu</li>
+        <li>Jeśli funkcja rekurencyjna operuje na dużej ilości danych (rekurencja wywołuje się wiele razy), przeglądarka
+          może protestować, wyrzucając wyjątek „Maximum call stack size exceeded"</li>
+      </ul>
+
+      <pre><code class="language-javascript">function factorial (n) {
+        if (n == 1 || n == 0) {
+            return 1;
+        }
+        else {
+            return n * factorial(n-1)
+        }
+    }
+        
+    console.log(factorial(4))
+
+    //inny przyklad - ciąg Fibonacciego
+    function fibonacci(n) {
+      if (n===1) {
+          return [0, 1];
+      } else {
+          const arr = fibonacci(n - 1);
+          arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
+          return arr;
+      }
+  }
+  
+  console.log(fibonacci(10)); //[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+</code></pre>
+
+
+
+      <h3>IIFE </h3>
+      <ul>
+        <li>Immediately-invoked function expression - czyli samo wywołujące się wyrażenie funkcyjne to wzorzec funkcji,
+          która sama się wywołuje. </li>
+        <li> Jeśli chcemy by funkcja wykonała się sama (bez jej wywołania) należy ją zamknąć w zwykłych nawiasach ()
+        </li>
+        <li> Kiedyś używano tego do ograniczania zasięgu zmiennych var</li>
+
+
+      </ul>
+
+      <h3> Map()</h3>
+      <ul>
+        Tworzy nową tablicę z wynikami użycia funkcji callback po kolei na każdym elemencie tablicy
+        <pre><code class="language-javascript">array.map(function(currentValue, index, arr), thisValue)
+
+var numbers = [4, 9, 16, 25];
+var x = numbers.map(Math.sqrt) // zwraca [2,3,4,5]
+</code></pre>
+      </ul>
+      <h3>Reduce()</h3>
+      <ul> Redukuje tablicę do pojedynczej wartości, wykonując funkcję callback na każdym elemencie oryginalnej tablicy,
+        od
+        lewej do prawej.
+        <pre><code class="language-javascript">array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+
+const array = [‘J’, ‘U’, ‘S’, ‘T’, ‘J’, ‘O’, ‘I’, ‘N’, ‘.’, ‘I’, ‘T’];
+const newText = array.reduce((prev, next) => `${prev}${next}`); // zwraca string “JUSTJOIN.IT”
+</code></pre>
+      </ul>
+
+      <h3>Filter()</h3>
+      <ul>Tworzy nową tablicę wypełnioną elementami z oryginalnej tablicy które
+        zdadzą test (z funkcji callback)
+        <pre><code class="language-javascript">array.filter(function(currentValue, index, arr), thisValue)
+
+var ages = [32, 33, 16, 40];
+function checkAdult(age) {
+  return age >= 18;
+}
+function myFunction() {
+  document.getElementById("demo").innerHTML = ages.filter(checkAdult);
+} 
+</code></pre>
+      </ul>
+
+      <h3>Every() </h3>
+      <ul>Sprawdza czy wszystkie elementy tablicy zdają test z funkcji
+        callback. Zwraca true lub false
+        <pre><code class="language-javascript">array.every(function(currentValue, index, arr), thisValue)
+
+var ages = [32, 33, 16, 40];
+function checkAdult(age) {
+  return age >= 18;
+}
+function myFunction() {
+  document.getElementById("demo").innerHTML = ages.every(checkAdult);
+} 
+</code></pre>
+      </ul>
+
+      <h3>Some()</h3>
+      <ul>Sprawdza czy jakikolwiek element tablicy zda test z funkcji callback.
+        Zwraca true lub false
+        <pre><code class="language-javascript">array.some(function(currentValue, index, arr), thisValue)
+
+var ages = [3, 10, 18, 20];
+function checkAdult(age) {
+  return age >= 18;
+}
+function myFunction() {
+  document.getElementById("demo").innerHTML = ages.some(checkAdult);
+} 
+</code></pre>
+      </ul>
+
+
+      <h3>Includes()</h3>
+      <ul>Sprawdza czy tablica zawiera dany element. Zwraca true lub false
+
+        <pre><code class="language-javascript">array.includes(element, start)
+
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+var n = fruits.includes("Mango"); //zwraca true
+</code></pre>
+      </ul>
+
+      <h3>Find()</h3>
+      <ul>Zwraca wartość pierwszego elementu z tablicy który zda test z funkcji callback
+
+        <pre><code class="language-javascript">const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find(element => element > 10);
+
+console.log(found);
+// expected output: 12
+</code></pre>
+      </ul>
+
+      <h3>forEach()</h3>
+      <ul>Wywołuje funkcję callback po kolei na każdym elemencie tablicy
+        <pre><code class="language-javascript">array.forEach(function(currentValue, index, arr), thisValue)
+
+var ages = [32, 33, 16, 40];
+function checkAdult(age) {
+  return age >= 18;
+}
+function myFunction() {
+  document.getElementById("demo").innerHTML = ages.every(checkAdult);
+} 
+</code></pre>
+      </ul>
+
+      <h3>Object.keys(wybrany_obiekt)</h3>
+      <ul>Tworzy tablicę składającą się z kluczy wybranego obiektu
+        <pre><code class="language-javascript">const object1 = {
+  a: 'somestring',
+  b: 42,
+  c: false
+};
+
+console.log(Object.keys(object1));
+// expected output: Array ["a", "b", "c"]
+</code></pre>
+      </ul>
+      <h3>Object.values(wybrany_obiekt)</h3>
+      <ul>Tworzy tablicę skłądającą się z właściwości wybranego obiektu. Podobna do działania pętli for...in
+        <pre><code class="language-javascript">const object1 = {
+  a: 'somestring',
+  b: 42,
+  c: false
+};
+
+console.log(Object.values(object1));
+// expected output: Array ["somestring", 42, false]
+</code></pre>
+      </ul>
+
+      <h3>Object.entries(wybrany_obiekt)</h3>
+      <ul>Tworzy tablicę składającą się z par klucz - właściwość, pobranych z wybranego obiektu. Kolejność nie jest
+        gwarantowana, tablica może wymagać posortowania
+        <pre><code class="language-javascript">const obj = { name: "Adam", age: 20, location: "Nepal" };
+console.log(Object.entries(obj)); // [ [ 'name', 'Adam' ], [ 'age', 20 ], [ 'location', 'Nepal' ] ]
+</code></pre>
+        <pre><code class="language-javascript">const object1 = {
+  a: 'somestring',
+  b: 42
+};
+
+for (const [key, value] of Object.entries(object1)) {
+  console.log(`${key}: ${value}`);
+}
+
+// expected output:
+// "a: somestring"
+// "b: 42"
+// order is not guaranteed
+</code></pre>
+      </ul>
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="text-box" id="2">
+      <h2>2. OOP</h2>
+
+      <ul>
+        <li>When we write our code using objects to represent entities, that’s called object-oriented programming, in short: “OOP”.</li>
+        <li> Obiekt to zbiór par klucz (key) - wartość (value). Wartością
+          właściwości może być funkcja, nazywana w tym przypadku metodą. Istnieją obiekty predefiniowane</li>
+        <li> W przypadku nazw w obiektach wielkość liter ma znaczenie </li>
+        <li>Właściwości z samym kluczem zwracają undefined</li>
+        <li>Obiekty możemy podzielić na pojedyncze instancje (pojedyncze egzemplarze), oraz grupy obiektów o podobnych
+          właściwościach (np. tablice, linki, buttony, stringi itp). </li>
+        <li> Obiekty mogą być rozbudowane, zawierając inne obiekty</li>
+        <li>W przeglądarce występuje Global Object("window "), do którego prowadzi this jeśli nie jest przypisane do innego obiektu</li>
+        <li>The __proto__ property is a bit outdated. It exists for historical reasons, modern JavaScript suggests that we should use Object.getPrototypeOf/Object.setPrototypeOf functions instead that get/set the prototype. We’ll also cover these functions later.</li>
+        <li>Wartości mogą mieć dowolny typ, klucze muszą być stringami lub symbolami</li>
+        <li>Obiekty są przypisywane do zmiennych/kopiowane z użyciem referencji. Czyli zmienna nie zawiera obiektu tylko referencję do miejsca w pamięci gdzie obiekt się znajduje, czyli kopiowanie zmiennej kopiuje referencję a nie sam obiekt.</li>
+      </ul>
+
+      <h3>3 sposoby na utworzenie wzoru obiektu</h3>
+
+      <ul>
+        <li>Inicjator obiektu (object initializer)</li>
+        <pre><code class="language-javascript">          const cat = {
+            name: "Bill",
+            speed: 1000,
+            showText() {
+                  return "Lubię walczyć ze złem";
+            }
+            //alternatywna deklaracja funkcji
+            showText: function() {
+              return "Lubię walczyć ze złem";
+            }
+          }
+         
+          const mycat = new cat;
+        
+        </code></pre>
+        <li>Konstruktor </li>
+        <pre><code class="language-javascript">        function Enemy(speed, power) {
+          this.live = 3;
+          this.speed = speed;
+          this.power = power;
+        
+          this.print = function() {
+              console.log(`
+                  Przeciwnik ma:
+                  życia: ${this.live}
+                  szybkości: ${this.speed}
+                  siły ataku: ${this.power}
+              `);
+          }
+        } </code></pre>
+        <li>Klasa </li>
+        <pre><code class="language-javascript">       class Animal {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        
+            method1() { }
+            method2() { }
+            method3() { }
+        }
+        
+        const animal = new Animal("pies", 8);  
+        </code></pre>
+        <li>Object.create() </li>
+        <pre><code class="language-javascript"> </code></pre>
+      </ul>
+
+      <h3>Get/Set</h3>
+      <ul>
+        <li>W obiektach możemy zdefiniować gettery i settery poprzedzając klucz słowem get lub set</li>
+        <pre><code class="language-javascript">          var o = {
+            a: 7,
+            get b() {
+              return this.a + 1;
+            },
+            set c(x) {
+              this.a = x / 2;
+            }
+          };
+          
+          console.log(o.a); // 7
+          console.log(o.b); // 8 -- At this point the get b() method is initiated.
+          o.c = 50;         //   -- At this point the set c(x) method is initiated
+          console.log(o.a); // 25</code></pre>
+      </ul>
+
+      <h3>Właściwości obiektów</h3>
+      <ul>
+        <li>Odwołać się do właściwości i metod można na 3 sposoby</li>
+        <pre><code class="language-javascript">obiekt.klucz 
+lub 
+obiekt["klucz"]
+lub 
+destrukturyzacja</code></pre>
+        <pre><code class="language-javascript">// dostęp do wybranej właściwości
+cat.speed
+
+// dostęp do metody
+car1.displayCar();
+
+// zmiana wartości
+myCar.make = 'Ford';
+
+// notacja nawiasowa
+myCar['make'] = 'Ford';
+
+// przykład
+var myObj = new Object(),
+    str = 'myString',
+    rand = Math.random(),
+    obj = new Object();
+
+myObj.type              = 'Dot syntax';
+myObj['date created']   = 'String with space';
+myObj[str]              = 'String value';
+myObj[rand]             = 'Random Number';
+myObj[obj]              = 'Object';
+myObj['']               = 'Even an empty string';
+
+console.log(myObj);
+
+// usunięcie właściwości z obiektu
+delete ob.klucz
+
+// sprawdzenie czy wybrany obiekt to instancja wybranego konstruktora
+console.log(enemyS instanceof EnemyShoot); //true
+
+// warunek przy tworzeniu obiektu
+if (cond) var x = {greeting: 'hi there'};</code></pre>
+
+        <li>Jeżeli pod klucze podstawiamy wartości z jakiś zmiennych, których nazwy są takie same jak danych kluczy,
+          możemy taki zapis skrócić:</li>
+        <pre><code class="language-javascript">//definiowanie obiektu razem z jego funkcją
+  const tab = [];
+  const name = "Szama";
+  const speed = 1000;
+  
+  //zamiast
+  const ob = {
+      name: name,
+      speed: speed
+  }
+  tab.push(ob);
+  
+  //mogę
+  tab.push({
+      name: name,
+      speed: speed
+  });
+  
+  //lub jeszcze lepiej
+  tab.push({name, speed});</code></pre>
+
+
+
+      </ul>
+      <h3> This</h3>
+      <ul>
+        
+        <li>Aby odwołać się do danego obiektu z wnętrza którejś z jego metod należy użyc słowa kluczowego 'this', które
+          wskazuje na aktualny kontekst</li>
+          <li>This w <span class="important">normalnej funkcji</span> wskazuje na obiekt przed kropką</li>
+          <li>This w  <span class="important">funkcji strzałkowej</span> jest pobierane z normalnej funkcji z zewnątrz</li>
+        <li> Jeśli funkcja nie jest metodą żadnego obiektu, to this wskazuje na obiekt globalny. Wyjątek to stric mode
+        </li>
+        <li> Czasem metoda w obiekcie może pochodzić z innego obiektu i wtedy this na niego wskazuje. Można sobie z tym
+          poradzić tworząc zmienną np. "const that = this" lub używając metod typu bind()</li>
+      </ul>
+      <h3> Metoda bind()</h3>
+      <ul>
+        <li>??Metoda bind() tworzy nową funkcję, której wywołanie powoduje ustawienie this na podaną wartość</li>
+        <pre><code class="language-javascript">
+  let dog = {
+    sound: 'woof',
+    talk: function() {
+      console.log(this.sound)
+    }
+  }
+
+  dog.talk() // "woof"
+  let talkFunction = dog.talk //undefined
+  let boundFunction = talkFunction.bind(dog)
+  boundFunction() // "woof"
+
+</code></pre>
+      </ul>
+
+      <h3>Kopiowanie obiektów</h3>
+      <ul>
+        <li>Jeśli używamy funkcji które wykonują na obiektach różne czynności to może dojść do nadpisania wartości.
+          Dlatego warto kopiować obiekty</li>
+        <li> Płaskie obiekty można kopiować używając spread syntax lub funkcji Object.assign (cel, ...źródła) </li>
+
+        <pre><code class="language-javascript">const John = {
+      name: 'John',
+      skill: {level: 4}
+    }
+
+/// Skopiowanie referencji
+const name1 = John
+
+/// Spread syntax
+const name2 = {...John}
+
+/// Object.assign(target, source) - zwraca zmodyfikowany obiekt zrodlowy
+const name3 = Object.assign({}, John)
+
+/// Object.create(source) - tworzy nowy obiekt, którego prototypem jest obiekt podany w parametrze
+const name4 = Object.create(John)
+
+/// JSON - głębokie klonowanie, bez funkcji
+const name5 = JSON.parse(JSON.stringify(Jon))
+    </code></pre>
+       
+      </ul>
+
+      <h3>Dziedziczenie</h3>
+      <ul>
+        <li>W Javascript występuje tak zwane dziedziczenie prototypowe. Oznacza to, że każdy* obiekt dziedziczy
+          właściwości i metody z przynajmniej jednego innego obiektu. </li>
+        <li>Jeżeli cokolwiek używamy dla danego obiektu, JavaScript początkowo szuka tego bezpośrednio w danym obiekcie.
+          Jeżeli tego nie znajdzie, korzystając z właściwości __proto__ przechodzi do prototypu i tam próbuje tej rzeczy
+          znaleźć i użyć.</li>
+      </ul>
+      <h3>Konstruktor</h3>
+      <ul>
+        <li>Konstruktor to zwykła funkcja (z wyjątkiem funkcji strzałkowej) która tworzy wzór obiektu. Jej nazwę piszemy wielką literą </li>
+        <li>Używamy go tylko z użyciem operatora "new"</li>
+        <li>Domyślnie wszystkie funkcje (w tym konstruktor) mają w prototypie właściwość constructor która prowadzi do niej samej - Name.prototype = { constructor: Name }. Dotyczy to też obiektów stworzonych pozniej za pomocą "new" </li>
+        <pre><code class="language-javascript">function Enemy(speed, power) {
+    this.live = 3;
+    this.speed = speed;
+    this.power = power;
+
+    this.print = function() {
+        console.log(`
+            Przeciwnik ma:
+            życia: ${this.live}
+            szybkości: ${this.speed}
+            siły ataku: ${this.power}
+        `);
+    }
+}
+
+/// Teraz uzywamy konstruktora
+
+function Enemy(speed, power) { ... }
+
+const enemy1 = new Enemy(3, 10);
+enemy1.print();
+
+const enemy2 = new Enemy(5, 15);
+enemy2.print();
+
+// Podobnie do innych typów
+const str = new String("Ala ma Konczenti");
+const nr = new Number(102);
+const arr = new Array(1, 2, 3);
+const bool = new Boolean(true);
+
+
+</code></pre>
+</ul>
+<h3>Prototyp</h3>
+<ul>
+  
+<li>Każdy obiekt w Javascript posiada właściwość 'Prototype', której wartość to null lub referencja do innego obiektu który nazywany jest wtedy prototypem.
+  </li>
+  <li><span class="important">__proto__</span> to historyczny getter/setter dla właściwości Prototype. Aktualnie częściej używa się
+  funkcji <span class="important">Object.getPrototypeOf/Object.setPrototypeOf</span>
+  </li>
+<li>Podczas wywołania metody obiektu najpierw sprawdzane jest, czy znajduje się ona bezpośrednio na obiekcie, a jeśli nie ma to szukana jest na prototypie obiektu.
+  Oznacza to, że obiekt otrzymuje metody i właściwości z prototypu. Proces ten to <span class="important">dziedziczenie prototypowe</span>
+</li>
+<li>Prototyp zawiera wszystkie właściwości i metody, które chcemy aby zostały odziedziczone przez wszystkie nowo tworzone instancje</li>
+<li>Prototyp używany jest tylko do odczytywania właściwości, tzn. wszystkie operacje modyfikujące działają tylko na danym obiekcie a nie na jego prototypie</li>
+<li>Niezależnie od umiejscowienia metody/właściwości, <span class="important">This</span> zawsze wskazuje na obiekt przed kropką, a nie na prototyp z którego pochodzi.</li>
+<li>Pętla for...in iteruje też po odziedziczonych wartościach. Jeśli chcemy tego uniknąć, możemy użyc w kodzie funkcji obj.hasOwnProperty(key</li>
+<li>Zagłębianie się w kolejnej prototypy w celu wyszukania wywołanej metody (lub wlasciwosci) nazywane jest korzystaniem z łańcucha prototypów</li>
+        <li> Typowa funkcja obiekt ma poza prototypem kilka właściwości, które zostały automatycznie dodane przez Javascript. Są to
+          między innymi name (nazwa funkcji), arguments (przekazane wartości), caller (funkcja, która wywołała aktualną
+          funkcję).
+        
+        </li>
+        <img src="https://kursjs.pl/kurs/obiekty/proto-to-prototype.jpg">
+        
+        <li>Prototyp jest obiektem, więc możemy go rozbudować tak samo jak to robiliśmy z innymi obiektami do tej pory.
+
+          Jeżeli kiedykolwiek coś do niego dodamy stanie się to dostępne dla wszystkich instancji już stworzonych i
+          tworzonych w przyszłości na bazie tego konstruktora. </li>
+        <pre><code class="language-javascript">/// Funkcja tworząca pusty obiekt z podanym prototypem, plus property descriptor opcjonalnie
+Object.create(proto, [descriptors])
+
+/// Zwraca prototyp obiektu, działa jak __proto__ getter
+Object.getPrototypeOf(obj) 
+
+/// Ustawia prototyp obiektu, działa jak __proto__ setter
+Object.setPrototypeOf(obj.proto)
+
+/// Inne przykłady
+function Enemy(speed, power) {
+    this.live = 3;
+    this.speed = speed;
+    this.power = power;
+}
+
+/// Dodajemy nowe metody do prototypu
+Enemy.prototype.attack = function() {
+    console.log(`Atakuje z siłą ${this.power} i szybkością ${this.speed}`);
+}
+
+Enemy.prototype.fly = function() {
+    console.log(`Lecę z szybkością ${this.speed}`);
+}
+
+/// Tworzę nowe obiekty
+const enemy1 = new Enemy(3, 10);
+enemy1.attack(); //Atakuje z siłą 10
+enemy1.fly(); //Lecę z szybkością 3
+
+const enemy2 = new Enemy(5, 15);
+enemy2.attack(); //Atakuje z siłą 15
+enemy2.fly(); //Lecę z szybkością 5
+  </code></pre>
+        <li> Zastosowanie prototypu ułatwia modyfikowanie funkcjonalności obiektów bo nie trzeba aktualizować wczesniej
+          utworzonych instancji, poza tym oszczędza nam zasoby</li>
+      </ul>
+      <h3>Object.create()</h3>
+      <ul>
+        <li>Funkcja która tworzy nowy obiekt. Jako pierwszy parametr przyjmuje ona
+          obiekt, który stanie się prototypem nowo tworzonego obiektu, czyli kopiowane są wszystkie właściwości obiektu </li>
+        <pre><code class="language-javascript">
+const car = { 
+    drive() {
+        console.log(this.name + " jadę");
+    },
+    refuel() {
+        console.log(this.name + " tankuję");
+    },
+    stop() {
+        console.log(this.name + " zatrzymuję się");
+    }
+}
+
+const c1 = Object.create(car);
+c1.name = "Samochód 1";
+c1.drive(); //Samochód 1 jadę
+
+const c2 = Object.create(car);
+c2.name = "Samochód 2";
+c2.drive(); //Samochód 2 jadę
+
+console.log(c1);
+console.log(c2);            
+          </code></pre>
+        <li>Drugim opcjonalnym parametrem jest obiekt, w którym możemy ustawić właściwości nowo tworzonego obiektu</li>
+        <pre><code class="language-javascript">
+            const c1 = Object.create(car, {
+              name: {
+                  value: 'Maluch'
+              },
+              km: {
+                  value: 0
+              }
+            }
+            </code></pre>
+       
+       
+       
+      </ul>
+      <h3>Object.assign()</h3>
+      <ul>
+        <li>Funkcja  kopiująca wszystkie iterowalne właściwości z źródłowego obiektu do docelowegu obiektu. Zwraca zmodyfikowany docelowy obiekt</li>
+        <pre><code class="language-javascript">
+Object.assign(target, ...sources)
+
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log(target);
+// expected output: Object { a: 1, b: 4, c: 5 }
+
+console.log(returnedTarget);
+// expected output: Object { a: 1, b: 4, c: 5 }
+          </code></pre>
+     
+       
+       
+       
+      </ul>
+      <h3>Klasy</h3>
+      <ul>
+        <li>W OOP klasa to kod który jest wzorem dla tworzenia obiektów, dostarczającym początkowe wartości zmiennych i implementującym metody </li>
+
+        <li>Klasy to nowy sposób zapisu opartego o prototypowy model dziedziczenia. Nie zmienia starego mechanizmu, jest
+          tylko przyjemniejszym zapisem tego samego</li>
+        <li> Każda klasa ma funkcję constructor() która jest odpalana przy tworzeniu nowej instancji za pomocą new</li>
+        <li>Metody danej klasy są przechowywane w prototypie</li>
+        <li>Kod klasy jest automatycznie w strict mode</li>
+        <li>Użycie "#" przed nazwą zmiennej lub metody w klasie sprawia że będzie ona prywatna, dostępna tylko dla kodu wewnątrz tej klasy. Możemy wtedy ustawić np. gettery i settery, a nie możemy modyfikować prywatnej treści kodem z zewnątrz</li>
+        <li> Metody klasy są nie iterowalne, dzięki czemu możemy loopować np. for...in po właściwościach obiektu </li>
+        <pre><code class="language-javascript">class MyClass {
+  constructor(name, age) {
+      this.name = name;
+      this.age = age;
+  }
+
+  method1() { }
+  method2() { }
+  method3() { }
+}
+
+const animal = new Animal("pies", 8);
+
+/// Właściwości można też definiować poza konstruktorem
+class Animal {
+  legs = 4;
+  type = "animal";
+}
+
+/// Klasę można też zdefiniować wewnątrz zmiennej
+let User = class {
+  sayHi() {
+    alert("Hello");
+  }
+};
+</code></pre>
+        <li> W JavaScript możemy też tworzyć metody statyczne, które są dostępne dla danej klasy.
+
+          Metody takie nie są dostępne dla nowych instancji, a tylko dla samych klas </li>
+        <li> Najczęściej wykorzystywane są do tworzenia użytecznych funkcji dla danej klasy. Można dzięki temu
+          pogrupować funkcjonalności dotyczące danych klas w jednym miejscu</li>
+        <pre><code class="language-javascript">class Human {
+  constructor(name) {
+      this.name = name;
+  }
+
+  say() {
+      console.log("Jestem człowiek");
+  }
+
+  static create() {
+      console.log("Tworzę");
+  }
+}
+  
+  const ob = new Human("Marcin");
+  ob.create(); //błąd
+  Human.create(); //"Tworzę"
+    </code></pre>
+      </ul>
+      
+      <h3>Konstruktor - dziedziczenie</h3>
+      <ul>
+        <li> Jeśli chcielibyśmy aby obiekt otrzymał metody innego obiektu moglibyśmy użyć kodu 'Obiekt1.prototype =
+          Obiekt2.prototype;' ale wtedy stają się tym samym obiektem i metoda dodana do jednego obiektu trafia do
+          wszystkich obiektów korzystających z tego prototypu. </li>
+        <li>Rozwiązaniem nie jest równanie prototypów, a stworzenie nowego obiektu na bazie innego prototypu.</li>
+        <pre><code class="language-javascript">  
+EnemyShoot.prototype = Object.create(Enemy.prototype);
+//lub
+EnemyShoot.prototype = Object.assign({}, Enemy.prototype);
+
+//lub
+EnemyShoot.prototype = Object.create(...Enemy.prototype);
+       </code></pre>
+        <li>Jeśli chcemy aby docelowy prototyp zawierał dziedziczone metody ale opierał się na konstruktorze, możemy go
+          ustawić jako własną właściwość </li>
+        <pre><code class="language-javascript">  
+  function Enemy(name, x, y) {
+    this.name = name;
+    this.x = x;
+    this.y = y;
+    console.log("Tworzę przeciwnika: " + this.name);
+}
+
+Enemy.prototype.fly = function() {
+    return this.name + " latam";
+}
+
+//dziedziczymy prototyp
+
+function EnemyShoot(name, x, y) {
+    this.name = name;
+    this.x = x;
+    this.y = y;
+    this.type = "shooter";
+}
+
+EnemyShoot.prototype = Object.create(Enemy.prototype);
+EnemyShoot.prototype.constructor = EnemyShoot;
+
+EnemyShoot.prototype.shoot = function() {
+    return this.name + " strzelam";
+}
+
+
+const enemyN = new Enemy("Normal");
+console.log(enemyN.fly()); //Normalny latam
+console.log(enemyN.shoot()); //błąd - nie ma takiej metody
+
+const enemyS = new EnemyShoot("Shooter");
+console.log(enemyS.fly()); //Shooter latam
+console.log(enemyS.shoot()); //Shooter strzelam
+</code></pre>
+
+        <li> </li>
+      </ul>
+      <h3>Metoda call() i apply()</h3>
+      <ul>
+        <li>Pozwala obiektowi zapożyczyć metodę z innego obiektu. Jako pierwszy parametr podajemy obiekt którego ma
+          dotyczyć this. Kolejne parametry to wskazane przez nas parametry.</li>
+        <li> Jesli wiemy że funkcja nie obsługuje this to pierwszy parametr nie jest obslugiwany, mozemy wpisac null
+          albo undefined.</li>
+        <pre><code class="language-javascript">
+        const ob = {
+          name : "x-wing",
+          print(shotCount, speed) {
+              console.log(`${this.name} strzela ${shotCount} razy z szybkością ${speed}`);
+          }
+      }
+      
+      const tie = {
+          name : "Tie fighter"
+      }
+      
+      ob.print.call(tie, 5, 200); //Tie fighter strzela 5 razy z szybkością 200  
+      </code></pre>
+        <li>Metodą apply() jest podobna ale przyjmuje 1 atrybut - tablicę z parametrami. Po wywołaniu funkcji za pomocą
+          apply() skłądowej tablicy są przekazywane jako kolejne parametry. Rzadko używana bo mając tablicę mozemy
+          zamienic ją na pojeyncze atrybuty za pomocą spread syntax.</li>
+        <pre><code class="language-javascript">
+        const ob = {
+          name : "nikt",
+          print(pet1, pet2) {
+              console.log(`Nazywam się ${this.name} i mam 2 zwierzaki: ${pet1} i ${pet2}`);
+          }
+      }
+      
+      const user = {
+          name : "Marcin"
+      }
+      
+      ob.print.apply(user, ["pies", "kot"]); //Nazywam się Marcin i mam dwa zwierzaki: pies i kot  
+      </code></pre>
+        <li> Używając metody call możemy nadpisać metodę wybranego prototypu</li>
+        <pre><code class="language-javascript"> 
+        function EnemyShoot(name, x, y) {
+          Enemy.call(this, name, x, y);
+          this.type = "shooter";
+      }
+      
+      EnemyShoot.prototype = Object.create(Enemy.prototype);
+      EnemyShoot.prototype.constructor = EnemyShoot;
+      
+      EnemyShoot.prototype.fly = function() {
+          const text = Enemy.prototype.fly.call(this); //tamta funkcja nie ma parametrów
+          return text + " i czasami strzelam!!!";
+      }
+      
+      const enemyN = new Enemy("Normal");
+      enemyN.fly(); //Normal latam
+      
+      const enemyS = new EnemyShoot("Shooter");
+      console.log(enemyS.fly()); //Shooter latam i czasami strzelam!!!
+      </code></pre>
+      </ul>
+
+      <h3>Klasy - dziedziczenie</h3>
+      <ul>
+        <li>Aby rozszerzyć jakąś klasę, a tym samym dziedziczyć po niej jej funkcjonalności, skorzystamy z instrukcji
+          extends</li>
+        <li>Instrukcja super() służy do wywołania kodu rozszerzanej metody</li>
+
+        <pre><code class="language-javascript"> 
+        import React from "react";
+
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {date: new Date()};
+            }
+        
+            render() {
+                return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                    </div>
+                );
+            }
+        }
+      </code></pre>
+        <li> Klasa abstrakcyjna to klasa, na bazie której nie powinniśmy tworzyć nowych instancji, a jedynie ją w
+          przyszłości rozszerzać. Na przykład gdy jest bazą dla innych klas i nie mamy potrzeby robić jej instacji</li>
+        <li>W Javascript możemy rozszerzać wbudowane typy używając klas</li>
+        <pre><code class="language-javascript"> 
+      class MyArray extends Array {
+          constructor(...param) {
+              super(...param);
+          }
+      
+          sortNr() {
+              return this.sort((a, b) => a - b);
+          }
+      }
+      
+      const tab1 = new Array(4, 5, 20, 21, 2.1, 1.2, 3);
+      tab1.sortNr(); //błąd : nie ma takiej metody
+      
+      const tab2 = new MyArray(4, 5, 20, 21, 2.1, 1.2, 3);
+      tab2.sortNr();
+      console.log(tab2); //[1.2, 2.1, 3, 4, 5, 20, 21]
+      </code></pre>
+      </ul>
+
+      <h3>Hermetyzacja kodu</h3>
+      <ul>
+        <li>Polega na odpowiednim ukrywaniu pewnych metod i właściwości naszego obiektu przed zewnętrznym środowiskiem
+        </li>
+        <li>W większości skryptów nie jest wymagane sięganie po omawiane tutaj rozwiązania. To, że takie rzeczy da się
+          stosować, wcale nie oznacza, że musisz to robić za każdym razem. W Javascript w większości przypadków
+          spokojnie wystarcza stosowanie zakresów (funkcji, bloków) oraz umiejętne dzielenie kodu na moduły.</li>
+        <li>Jednym z dość często stosowanych rozwiązań jest zastosowanie konwencji poprzedzania prywatnych składowych
+          <span class="important"> znakiem podłogi</span>. Konwencja ta nie zabezpiecza nam kodu, a tylko daje wskazówkę
+          dla innych programistów, że
+          danej składowej nie powinno się ruszać spoza obiektu.
+        </li>
+        <pre><code class="language-javascript">
+const my = new SimpleClass();
+
+//tego nie powinienem
+my._privateMethod();
+my._privateNumber = "ala ma kota";
+
+//to mogę
+my.publicMethod();
+my.publicNumber = "ala ma kota";
+            
+          </code></pre>
+        <li>Jeżeli w danym projekcie nie używasz modułów, możesz jawnie okryć swój kod funkcją - np.<span
+            class="important"> IIFE</span>, lub
+          zastosować tak zwany <span class="important">wzorzec fabryki</span>. Polega on na stworzeniu funkcji, która
+          zwraca nam jakiś obiekt. Zwracany
+          obiekt widzi swoje środowisko (czyli wnętrze funkcji), natomiast reszta kodu nie będzie miała do tych rzeczy
+          dostępu.</li>
+        <li>Do zabezpieczenia zmiennych lokalnych przed niepożądanym dostępem możemy użyć wzorca fabryki połączonego z
+          <span class="important">getterami i setterami</span>
+        </li>
+        <pre><code class="language-javascript">
+        function makeObj() {
+              let _name = "";
+              let _counter = 0;
+          
+              return {
+                  set name(newName) {
+                      _name = newName;
+                  },
+                  get name() {
+                      return _name;
+                  },
+          
+                  set counter(nr) {
+                      _counter = nr;
+                  },
+                  get counter(){
+                      return _counter;
+                  }
+              }
+          }
+          
+          const ob = makeObj();
+          console.log(ob._counter); //undefined
+          
+          ob.counter = 20;
+          console.log(ob.counter); //20
+          
+          ob._name = "Piotr";
+          ob.name = "Karol";
+          console.log(ob.name); //"Karol"
+          </code></pre>
+      </ul>
+     
+
+
+
+    </div>
+
+
+
+    <div class="text-box" id="3">
+      <h2>3. Map & Set</h2>
+      <h3>Map()</h3>
+      <ul>
+        <li>Map i Set to dwie struktury danych, które są czymś pomiędzy tablicami i klasycznymi obiektami.</li>
+      </ul>
+      <ul>
+        <li>Mapy służą do tworzenia zbiorów z parami [klucz - wartość]. Kluczami może być tutaj dowolny typ danych,
+          gdzie w przypadku obiektów i tablic są one konwertowane na tekst </li>
+        <pre><code class="language-javascript">const map = new Map();
+map.set("kolor1", "red");
+map.set("kolor2", "blue");
+
+//lub
+
+const map = new Map([
+    ["kolor1", "red"],
+    ["kolor2", "blue"],
+]);
+        </code></pre>
+        <li>Dla każdej mapy mamy dostęp do kilku metod</li>
+        <img src="images/map.png">
+        <pre><code class="language-javascript">          const map = new Map();
+
+          map.set("kolor1", "red");
+          map.set("kolor2", "blue");
+          map.set("kolor3", "yellow");
+          
+          console.log(map.get("kolor1")); //red
+          console.log(map.delete("kolor2"));
+          console.log(map.keys()); //MapIterator {"kolor1", "kolor3"} </code></pre>
+
+        <li>Jeżeli będziemy chcieli iterować po mapie, możemy wykorzystać pętlę for of i poniższe funkcje zwracające
+          iteratory lub użyć funkcji forEach()</li>
+        <pre><code class="language-javascript">
+        const map = new Map([
+            ["kolor1", "red"],
+            ["kolor2", "blue"],
+            ["kolor3", "yellow"]
+        ]);
+        
+        for (const key of map.keys()) {
+            //kolor1, kolor2, kolor3
+        }
+        
+        for (const key of map.values()) {
+            //red, blue, yellow
+        }
+        
+        for (const entry of map.entries()) {
+            //["kolo1", "red"]...
+        }
+        
+        for (const [key, value] of map.entries()) {
+            //key : "kolo1", value : "red"...
+        }
+        
+        for (const entry of map) {
+            //["kolor1", "red"]...
+        }
+
+        ///////
+
+        const map = new Map([
+        ["kolor1", "red"],
+        ["kolor2", "blue"],
+        ["kolor3", "yellow"]
+        ]);
+        
+        map.forEach((value, key, map) => {
+        console.log(`
+            Wartość: ${value}
+            Klucz: ${key}
+        `);
+        });
+          </code></pre>
+
+      </ul>
+      <h3>Set()</h3>
+      <ul>
+        <li>Obiekt Set jest kolekcją składającą się z unikalnych wartości, gdzie każda wartość może być zarówno typu
+          prostego jak i złożonego. W przeciwieństwie do mapy jest to zbiór pojedynczych wartości.</li>
+        <img src="images/set.png">
+        <pre><code class="language-javascript"> 
+            const set = new Set();
+            set.add(1);
+            set.add("text");
+            set.add({name: "kot"});
+            console.log(set); //{1, "text", {name : "kot"}}
+            
+            //lub
+            //const set = new Set(elementIterowalny);
+            const set = new Set([1, 1, 2, 2, 3, 4]); //{1, 2, 3, 4}
+            const set = new Set("kajak"); //{"k", "a", "j"}
+
+            //metody
+            const mySet = new Set();
+            mySet.add(1);
+            mySet.add(5);
+            mySet.add(5);
+            mySet.add("text"); //Set { 1, 5, "text"}
+
+            mySet.has(5); // true
+            mySet.delete(5); //Set {1, "text"}
+            console.log(mySet.size); //2
+          </code></pre>
+        <li>Dzięki temu, że Set zawiera niepowtarzające się wartości, możemy to wykorzystać do odsiewania duplikatów w
+          praktycznie dowolnym elemencie iteracyjnym - np. w tablicy</li>
+        <pre><code class="language-javascript">
+            const tab = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 5, 5];
+
+            const set = new Set(tab);
+            console.log(set); //{1, 2, 3, 4, 5}
+            
+            const uniqueTab = [...set];
+            console.log(uniqueTab); //[1, 2, 3, 4, 5] 
+          </code></pre>
+      </ul>
+      <h3>WeakMap() i WeakSet()</h3>
+      <ul>
+        <li>WeakMap() to odmiana Mapy, różniąca się od niej tym że nie można po niej iterować, kluczami mogą być tylko
+          obiekty, a jej elementy są automatycznie usuwane gdy do obiektu(klucza) nie ma referencji</li>
+        <li>Podobnie jak dla Map istnieją WeakMap, tak dla Setów istnieją WeakSet. Są to kolekcje składające się z
+          unikalnych obiektów. Podobnie do WeakMap obiekty takie będą automatycznie usuwane z WeakSet, jeżeli do danego
+          obiektu zostaną usunięte wszystkie referencje.</li>
+      </ul>
+    </div>
+
+    <div class="text-box" id="4">
+      <h2>4. Document Object Model</h2>
+      <ul>
+        <li>Do odzwierciedlenia struktury elementów na stronie Javascript (ale też niektóre inne języki) korzysta z DOM
+          czyli Document Object Model. Model ten opisuje jak zaprezentować tekstowe dokumenty HTML w postaci modelu
+          obiektowego w pamięci komputera. Przeglądarka wiec czyta kod
+          naszej strony, parsuje go a następnie podaje nam zbudowane na jego podstawie drzewo DOM. </li>
+        <img src="images/dom.png">
+        <li>Dostęp do elementów DOM </li>
+        <pre><code class="language-javascript">document.getElementById('someid');
+
+document.getElementsByClassName('someclass');
+
+document.getElementsByTagName('LI');
+
+document.querySelector('ul li'); // pierwszy pasujący element
+
+document.querySelectorAll('div.note, div.alert'); // kolekcja elementów
+        </code></pre>
+
+        <li>Dostęp do dzieci/rodziców - każdy element na stronie tworzy tak zwany węzeł. Takimi węzłami są nie tylko
+          elementy, ale także tekst w nich zawarty. </li>
+        <pre><code class="language-javascript">          const p = document.querySelector("p");
+
+          // pobierające elementy html
+          p.parentElement //wskazuje na nadrzędny element - div.text-cnt
+          p.firstElementChild //pierwszy element w #text
+          p.lastElementChild //ostatni element w #text
+          p.children //[strong, span] - kolekcja dzieci elementu #text
+          p.children[0] //wskazuje na 1 element - <strong style="color:red">Ala</strong>
+          p.nextElementSibling //następny brat-element
+          p.previousElementSibling //poprzedni brat-element
+          
+          // pobierające węzły
+          p.parentNode //wskazuje na nadrzędny węzeł - div.text-cnt
+          p.firstChild //pierwszy node - w naszym przypadku to tekst "Mała "
+          p.lastChild //ostatni node - "" - html jest sformatowany, wiec ostatnim nodem jest znak nowej linii
+          p.childNodes //[text, strong, text] - kolekcja wszystkich dzieci - nodów
+          p.childNodes[0] //"Mała"
+          p.nextSibling //następny węzeł
+          p.previousSibling //poprzedni węzeł
+        </code></pre>
+        <pre><code class="language-javascript"> 
+           //metoda element.closest("selektor") odnajduje najbliższy element w górę drzewa
+
+           const btn = document.querySelector(".button")
+           btn.addEventListener("click", e => {
+              const module = btn.parentElement.parentElement.parentElement;
+              // lub
+              const module = btn.closest(".module");
+           });   
+        </code></pre>
+        <li>Gotowe kolekcje </li>
+        <pre><code class="language-javascript">          document.body //element body
+          document.all //kolekcja ze wszystkimi elementami na stronie
+          document.forms //kolekcja z formularzami na stronie
+          document.images //kolekcja z grafikami img na stronie
+          document.links //kolekcja z linkami na stronie
+          document.anchors //kolekcja z linkami będącymi kotwicami</code></pre>
+        <li>Tworzenie nowych elementów </li>
+        <pre><code class="language-javascript"> // create new elments
+var newHeading = document.createElement('h1');
+var newParagraph = document.createElement('p');
+
+// create text nodes for new elements
+var h1Text= document.createTextNode('This is a nice header text!');
+var pText= document.createTextNode('This is a nice paragraph text!');
+
+//Klonowanie
+const cloneEl1 = el.cloneNode();
+        </code></pre>
+
+        <li>Dodawanie elementów do DOM </li>
+        <pre><code class="language-javascript">          // grab element on page you want to add stuff to
+          var firstHeading = document.getElementById('firstHeading');
+          
+          // wstawia element na koniec wybranego elementu
+          firstHeading.appendChild(newHeading);
+          firstHeading.appendChild(newParagraph);
+          
+          // can also insert before like so
+          
+          // get parent node of firstHeading
+          var parent = firstHeading.parentNode;
+          
+          // insert newHeading before FirstHeading
+          parent.insertBefore(newHeading, firstHeading);
+        </code></pre>
+
+        <li>Usuwanie elementów</li>
+        <pre><code class="language-javascript">          const div = document.querySelector("div")
+          const el = div.querySelector("span");
+          const btn = document.querySelector("button");
+          
+          btn.addEventListener("click", e => {
+              parent.removeChild(el);
+          
+              //lub
+              el.parentElement.removeChild(el);
+          
+              //lub najprościej
+              el.remove();
+          });
+        </code></pre>
+
+        <li>Modyfikacja klas </li>
+        <pre><code class="language-javascript">          el.classList.add("btn");
+          el.classList.add("btn", "btn-primary");
+          el.classList.remove("btn");
+          el.classList.toggle("btn");
+          el.classList.contains("btn");
+          el.classList.replace("old", "new");
+        </code></pre>
+
+        <li> HTML & inline CSS</li>
+        <pre><code class="language-javascript">const element = document.querySelector("div");
+element.style.color = "red"; //ustawiam kolor tekstu na czerwony
+
+const btn = document.querySelector(".btn");
+console.log(btn.innerHTML); // odczyt html
+console.log(btn.innerText); /// tekst ze stylami
+console.log(btn.textContent); // tekst oryginalny z pliku html, z wcięciami itp.
+
+//tagName - nazwa elementu
+const elements = document.querySelectorAll("body *");
+for (const el of elements) {
+    if (el.tagName === "STRONG") {
+        el.style.border = "1px solid red";
+    }
+}
+
+//kilka wartosci naraz
+el.style.cssText = `
+    color: red;
+    background: blue;
+    padding: 10px;
+`;
+
+//pobranie CSS - poza inline mozemy pobrac tylko computed tzn. to co juz w przeglądarce
+window.getComputedStyle(elem, pseudoElement*).
+   </code></pre>
+        <li> setProperty() i getPropertyValue() - ustawienie stylowania, uzywane ze zmiennymi CSSa</li>
+        <pre><code class="language-javascript">   el.style.setProperty("--size", "1em");
+    el.style.getPropertyValue("--size"); //"1em"
+       </code></pre>
+      </ul>
+      <h3>Pętle w DOM</h3>
+      <ul>
+        <li>Pętla po kolekcji</li>
+        <pre><code class="language-javascript">const elements = document.querySelectorAll(".module");
+
+    elements[0].style.color = "red"; //ok bo pierwszy element w kolekcji
+    
+    //ok, bo robimy pętlę
+    for (const el of elements) {
+        el.style.color = "red";
+    }
+</code></pre>
+        <li>Na kolekcji nie możemy używać metod tablic (filter,some,map). Wymagana jest konwersja za pomocą spread
+          syntax/Array.from() lub użycie forEach</li>
+        <pre><code class="language-javascript">const buttons = document.querySelectorAll("button");
+[...buttons].map(el => el.style.color = "red");
+          </code></pre>
+        <pre><code class="language-javascript">const elements = document.querySelectorAll(".module");
+
+            elements.forEach(el => {
+                el.style.color = "blue"
+            });</code></pre>
+      </ul>
+      <h3>Obsługa zdarzeń</h3>
+      <img src="images/eventf.png">
+      <pre><code class="language-javascript">element.addEventListener('nameOfEvent', functionToRun);
+element.removeEventListener('nameOfEvent', functionToStopRunning);
+e.preventDefault() // zapobieganie domyślnej akcji
+console.log("e.target: ", e.target); // e.target wskazuje element na którym zdarzenie się wydarzyło (nastapiła faza target)
+console.log("e.currentTarget: ", e.currentTarget, parent); // wskazuje na element do którego podpięliśmy funkcję nasłuchującą
+ </code></pre>
+      <img src="images/events.png">
+      <h3>Praca z atrybutami HTMLa</h3>
+
+      <img src="images/atrybuty.png">
+
+      <h3>dataset</h3>
+      <ul>
+        <li>Własne atrybuty możemy obsługiwać za pomocą powyższych metod, ale możemy dla nich skorzystać z właściwości
+          dataset. Jest to obiekt, którego kolejne właściwości są budowane na bazie niestandardowych atrybutów</li>
+        <li>Przy podawaniu nazwy danego atrybutu pomijamy początek data-, a myślniki w nazwie zamieniamy na zapis
+          camelCase. </li>
+        <pre><code class="language-javascript"></code>
+    tooltip.dataset.myCustomData = "nowa wartość"; //utworzy w elemencie atrybut data-my-custom-data="nowa wartość"
+    tooltip.dataset.style = "primary"; //utworzy atrybut data-style="primary"
+    tooltip.dataset.moduleSize = "big" //utworzy atrybut data-module-size="big"
+            
+    //to samo możemy uzyskać za pomocą getAttribute i setAttribute
+    tooltip.setAttribute("data-custom-data", "nowa wartość");
+    tooltip.setAttribute("data-style", "primary");
+    tooltip.setAttribute("data-module-size", "big");
+          </code></pre>
+      </ul>
+      <img src="images/atrybuty.png">
+
+
+    </div>
+
+    <div class="text-box" id="5">
+      <h2>5. Formularze i walidacja</h2>
+      <ul>
+        <li>Przykładowy formularz</li>
+        <form action="" method="get" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+          <br>
+          <div class="formcolumn">
+            <label for="fname">Tekst</label><br>
+            <input type="text" id="firstId" name="firstName" value="firstValue"><br>
+
+            <label for="fname">Radio</label><br>
+            <input type="radio"><br>
+
+            <label for="fname">Checkbox</label><br>
+            <input type="checkbox"><br>
+
+            <label for="fname">Button</label><br>
+            <button type="button" onclick="">Click Me!</button> <br>
+          </div>
+          <div class="formcolumn">
+            <label for="fname">Submit</label><br>
+            <input type="submit"><br>
+
+            <label for="cars">Choose a car:</label><br>
+            <select id="cars" name="cars"><br>
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select> <br>
+
+            <textarea name="message" rows="10" cols="30">
+            The cat was playing in the garden.
+            </textarea> <br>
+
+            0
+            <input type="range" id="a" name="a" value="50">
+            100 +
+            <input type="number" id="b" name="b" value="50">
+            =
+            <output name="x" for="a b"></output>
+            <br><br>
+
+            <br><br>
+          </div>
+        </form>
+        <li>Właściwości i metody dla całych formularzy</li>
+        <pre><code class="language-javascript">//właściwości
+form.elements - kolekcja wszystkich elementów formularza 
+form.action - atrybut action formularza, czyli adres na który formularz zostanie wysłany
+form.method - metoda jaką zostanie wysłany formularz (omawiana w dziale Ajax)
+
+//metody
+form.submit(); //funkcja wysyłająca formularz
+form.reset(); //funkcja resetująca formularz   
+        </code></pre>
+        <li>Główną interesującą nas wartością jest <span class="important">value</span> czyli aktualna wartość danego
+          pola, która zawsze jest stringiem </li>
+        <li>Najczęściej wykorzystywane właściwości</li>
+        <img src="images/formp.png">
+        <li>Najczęściej wykorzystywane zdarzenia</li>
+        <img src="images/formz.png">
+        <li>Skrypt wykonujący pętlę po radio buttonach i wyswietlający wynik który pobiera z napisu obok radio buttona
+        </li>
+        <pre><code class="language-javascript">const form = document.querySelector("#myForm");
+const genderRadio = form.querySelectorAll("input[name=gender]");
+const resultElement = document.querySelector("#genderResult");
+
+for (const radio of genderRadio) {
+    radio.addEventListener("change", e => {
+        for (const radio of genderRadio) {
+            if (radio.checked) {
+                resultElement.innerText = radio.nextSibling.data; //pobieram tekst leżący obok radio
+                break;
+            }
+        }
+    });
+}
+
+</code></pre>
+        <li>Dzięki Javascript dla checkboxów możemy ustawić trzecią, niedostępną z HTML opcję - czyli <span
+            class="important">indeterminate</span>, która oznacza pół zaznaczenie</li>
+        <li>Select-właściwości</li>
+        <pre><code class="language-javascript">select.value //wartość pola
+select.options //kolekcja elementów option
+select.selectedIndex //indeks wybranego optiona
+select.options[selectedIndex] - zaznaczony option
+</code></pre>
+        <li>Dla select możemy ustawić nowe opcje używają funkcji<span class="important"> createElement</span>lub
+          konstruktora <span class="important">Option(text*, value*, defaultSelected*, selected*)</span></li>
+      </ul>
+
+
+      <h3>Walidacja formularzy</h3>
+      <ul>
+        <li>Walidację można przeprowadzać 1) Po stronie HTML 2) W czasie wprowadzania danych przez użytkownika, z
+          wykorzystaniem zdarzeń typu change/focus/keypress itd, 3) Tuż przed wysłaniem 4) Po stronie serwera</li>
+        <li>Walidacja po stronie HTML</li>
+        <img src="images/formhtml.png">
+        <li>Aby wykonać walidację przed wysłaniem danych podpinamy się pod zdarzenie <span
+            class="important">submit</span> i używamy <span class="important">preventDefault()</span></li>
+        <li>Gdy pojawi się w naszym formularzu kilka pól, trzeba jakoś zebrać wyniki. Rozwiązań jest wiele. Jednym z
+          nich jest ręczne sprawdzanie kolejnych pól, gdzie wyniki testów możemy trzymać w oddzielnej tablicy.</li>
+        <li>Skrypt walidujący formularz w trakcie wpisywania i przed wysłaniem, wraz z wyświetleniem listy błędów</li>
+        <pre><code class="language-javascript">function testText(field, lng) {
+    return field.value.length >= lng;
+}
+
+function testEmail(field) {
+    const reg = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$/;
+    return reg.test(field.value);
+};
+
+function markFieldAsError(field, show) {
+    if (show) {
+        field.classList.add("field-error");
+    } else {
+        field.classList.remove("field-error");
+    }
+};
+
+//------------------------
+//pobieram elementy
+//------------------------
+const form = document.querySelector("form");
+const inputName = form.querySelector("input[name=name]");
+const inputEmail = form.querySelector("input[name=email]");
+const formMessage = form.querySelector(".form-message");
+
+
+//------------------------
+//etap 1 : podpinam eventy
+//------------------------
+inputName.addEventListener("input", e => markFieldAsError(e.target, !testText(e.target)));
+inputEmail.addEventListener("input", e => markFieldAsError(e.target, !testEmail(e.target)));
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  let formErrors = [];
+
+  //------------------------
+  //2 etap - sprawdzamy poszczególne pola gdy ktoś chce wysłać formularz
+  //------------------------
+  //chowam błędy
+  for (const el of [inputName, inputEmail]) {
+      markErrorField(el, false);
+  }
+
+  //i testuję w razie czego zaznaczając pola
+  if (!testText(inputName, 3)) {
+      markFieldAsError(inputName, true);
+      formErrors.push("Wypełnij poprawnie pole z imieniem");
+  }
+
+  if (!testEmail(inputEmail)) {
+      markFieldAsError(inputEmail, true);
+      formErrors.push("Wypełnij poprawnie pole z emailem");
+  }
+
+  if (!formErrors.length) { //jeżeli nie ma błędów wysyłamy formularz
+      form.submit();
+      //...lub dynamicznie wysyłamy dane za pomocą Ajax
+      //równocześnie reagując na odpowiedź z serwera
+  } else {
+      //jeżeli jednak są jakieś błędy...
+      formMessage.innerHTML = `
+          <h3 class="form-error-title">Przed wysłaniem formularza proszę poprawić błędy:</h3>
+          <ul class="form-error-list">
+              ${formErrors.map(el => `<li>${el}</li>`).join("")}
+          </ul>
+      `;
+  }
+});
+          </code></pre>
+
+        <li>JS udostępnia nam też specjalny interfejs do walidacji - Constrains Validation API <a
+            href="https://kursjs.pl/kurs/formularze/formularze-validation-api.php">https://kursjs.pl/kurs/formularze/formularze-validation-api.php</a></a>
+        </li>
+        <li>Formularz kontaktowy z walidacją, fetch() i serwerowym PHP <a
+            href="https://kursjs.pl/kurs/formularze/formularz-kontaktowy.php">https://kursjs.pl/kurs/formularze/formularz-kontaktowy.php</a></a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="text-box" id="6">
+      <h2>6. AJAX</h2>
+      <ul>
+        <li>AJAX czyli Asynchronous JavaScript and XML to technika, wzorzec, który umożliwia nam dynamiczne ściąganie i
+          wysyłanie danych bez potrzeby przeładowania całej strony. </li>
+        <li>Żądanie trafia na serwer DNS który kieruje ruch na odpowiedni numer IP. Po dotarciu do serwera, ten
+          analizuje zapytanie i zwraca odpowiedź</li>
+        <li> Odpowiedź składa się z 1) statusu odpowiedzi 2) 0 lub więcej nagłówków 3) ciała odpowiedzi - body</li>
+        <li> Status odpowiedzi to oznaczenie, czy dane połączenie zakończyło się sukcesem. Na obrazku poniżej wypisano
+          najczęściej spotykane statusy</li>
+        <img src="images/404.png">
+        <li>Nagłówek content/type, określa typ MIME danych. Jest to rodzaj danego pliku czy dokumentu. Dla przykładu
+          dokument HTML ma typ text/html, filmy mp4 mają typ video/mp4, a pliki dźwiękowe WAV mają audio/x-wav. </li>
+        <img src="images/get.png">
+      </ul>
+      <h3>JSON</h3>
+      <ul>
+        <li>JSON to sposób na przechowywanie i przekazywanie danych za pomocą zapisu obiektowego składni Javascriptu.
+        </li>
+        <li>Obiekt ten udostepnia nam 2 metody </li>
+        <li>Stringify() zamienia dany obiekt na format JSON. Parse() zamienia zakodowany wcześniej tekst na obiekt
+          Javascript</li>
+          <li>JSON nie jest w stanie przechowywać funkcji więc je wycina</li>
+      </ul>
+      <h3>Fetch API</h3>
+      <ul>
+        <li>Nowy interfejs, a także następca XMLHttpRequest, który podobnie do swego brata pozwala pracować z
+          dynamicznymi połączeniami</li>
+        <li>Zwraca obietnicę, którą możemy skonsumować metodami then()/catch() lub async/await </li>
+        <li>Stringify() zamienia dany obiekt na format JSON. Parse() zamienia zakodowany wcześniej tekst na obiekt
+          Javascript</li>
+
+        <pre><code class="language-javascript"> 
+    fetch("https://restcountries.eu/rest/v2/name-anka-kaszanka/Poland")
+    .then(res => {
+        if (res.ok) {
+            return res.json()
+        } else {
+            return Promise.reject(`Http error: ${res.status}`);
+            //lub rzucając błąd
+            //throw new Error(`Http error: ${res.status}`);
+        }
+    })
+    .then(res => {
+        console.log(res)
+    })
+    .catch(error => {
+        console.error(error)
+    });
+
+
+    try {
+      const res = await fetch("https://restcountries.eu/rest/v2/name-anka-kaszanka/Poland")
+      if (!res.ok) {
+          throw new Error(`Http error: ${res.status}`);
+      }
+      const json = await res.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+</code></pre>
+        <li>Drugim parametrem fetch jest obiekt, który pozwala nam przekazywać dodatkowe opcje.</li>
+        <pre><code class="language-javascript"> 
+  fetch("...", {
+    method: 'POST', //*GET, POST, PUT, DELETE, etc.
+    mode: 'cors', //no-cors, *cors, same-origin
+    cache: 'no-cache', //*default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', //include, *same-origin, omit
+    headers: {
+        'Content-Type': 'application/json'
+        //'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify(data) //treść wysyłana
+  })
+</code></pre>
+
+        <li>Nagłówki takie możemy ustawiać jak powyżej (i zapewne tak będziemy robić najczęściej), ale możemy też
+          skorzystać z interfejsu Headers(), który udostępnia nam dodatkowe metody do manipulacji pojedynczymi
+          nagłówkami</li>
+        <li> Inny przykład użycia tego API</li>
+        <pre><code class="language-javascript">
+const ob = {
+  name : "Piotrek",
+  age : 10,
+  pet : {
+      type : "ultra dog",
+      speed: 1000,
+      power : 9001
+  }
+}
+
+fetch("...", {
+      method: "post",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(ob)
+  })
+  .then(res => res.json())
+  .then(res => {
+      console.log("Dodałem użytkownika:");
+      console.log(res);
+  })
+</code></pre>
+        <li>Przykład użycia fetch z async/await</li>
+        <pre><code class="language-javascript">
+  const getSuggestions = async () => {
+    const wordQuery = inputField.value;
+    const endpoint = `${url}${queryParams}${wordQuery}`;
+    try{
+  const response = __~await~__ __~fetch(endpoint, {cache: 'no-cache'});
+      if(response.ok){
+        const jsonResponse = await response.json()
+      }
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+</code></pre>
+      </ul>
+
+    </div>
+
+    <div class="text-box" id="7">
+      <h2>7. Asynchroniczność</h2>
+      <ul>
+        <li>Standardowo kod wykonuje się synchronicznie tzn. linia po linii, jednowątkowo. Oznacza to, że w danym
+          momencie może wykonywać tylko jeden kod, a dopóki go nie wykona, nie jest w stanie wykonać nic innego. </li>
+        <li> W Javascript występują asynchroniczne funkcje, jak setTimeout(), fetch() lub addEventlistener(). Pochodzą z
+          globalnego obiektu window z API przeglądarki</li>
+        <li>Asynchroniczny kod może być wykonywany równolegle do reszty aplikacji nie przeszkadzając jej w działaniu,
+          ale też rezultat działania nie jest natychmiastowy.</li>
+        <li>Asynchroniczność powstała żeby strona nie była zamrożona gdy node czeka na wykonanie jakiejś funkcji</li>
+        <li> Jeśli wykonujemy funkcję, trafia on na stos (call stack). Kolejne funkcje w niej zawarte podwyższają stos.
+          Potem wykonywany jest kod od góry stosu, czyli od najgłębszej funkcji.</li>
+        <li> Jeśli funkcja jest asynchroniczna to trafia do przeglądarki (Web API) która przejmuje oczekiwanie na ich
+          wykonanie. Gdy tam się załaduje to trafia do kolejki zdarzeń (event loop)</li>
+        <li>Event loop cały czas "krąży" i sprawdza czy stos jest pusty. Nie może na niego nic wrzucić tylko czeka.
+          Czyli w praktyce asynchroniczne funkcje robią się na końcu</li>
+        <img src="images/stos.png">
+      </ul>
+      <h3>setTimeout(fn, time*, arg1*, arg2*...), setInterval(fn, time*, arg1*, arg2*...) </h3>
+      <ul>
+        <li>Funkcja przydatna gdy chcemy wykonać akcję po czasie. Jego wartość jest przybliżona.</li>
+        <pre><code class="language-javascript"> 
+        function myFunc() {
+          console.log("Jakiś tekst");
+        }
+      
+      setTimeout(myFunc, 1200); //odpali po 1.2s
+
+      //funkcja przerywająca 
+      const time = setTimeout(() => {
+        console.log("Pełne zaskoczenie");
+      }, 10000);
+    
+       clearTimeout(time);
+
+       //interwał + jego przerwanie, przyjmuje 1 parametr 
+       let i = 0;
+       const interval = setInterval(() => {
+             i++;
+             console.log(i);
+             if (i >= 10) {
+                 clearInterval(interval);
+             }
+       }, 1000);
+
+      </code></pre>
+      </ul>
+
+      <h3> Callbacks - funkcje zwrotne</h3>
+      <ul>
+        <li> Callback to funkcja przekazana jako argument (bez nawiasow) do innej funkcji. Najczęściej używana w
+          przypadku funkcji asynchronicznych </li>
+        <pre><code class="language-javascript">
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+  
+  function myCalculator(num1, num2, myCallback) {
+    let sum = num1 + num2;
+    myCallback(sum);
+  }
+  
+  myCalculator(5, 5, myDisplayer);
+
+</code></pre>
+        <li> Jeśli tworzymy funkcję ładującą dane z zewnątrz (jak skrypt lub plik), musi ona poczekać na załadowanie, w
+          przeciwnym wypadku nie zdąży pobrać danych przed wykonaniem kodu. Dobrze wtedy używać callbacków</li>
+        <pre><code class="language-javascript">
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+  
+  function getFile(myCallback) {
+    let req = new XMLHttpRequest();
+    req.open('GET', "mycar.html");
+    req.onload = function() {
+      if (req.status == 200) {
+        myCallback(this.responseText);
+      } else {
+        myCallback("Error: " + req.status);
+      }
+    }
+    req.send();
+  }
+  
+  getFile(myDisplayer);
+
+</code></pre>
+        <li> Callbacki to dobra opcja gdy mamy 1 lub 2 funkcje. W przypadku ich większej ilości wpadamy w "callback
+          hell" jeśli chcemy żeby funkcje wykonały się jedna po drugiej. Dlatego używamy obietnic</li>
+      </ul>
+
+      <h3> Promise - obietnice</h3>
+      <ul>
+
+        <li>Obietnice to obiekty które wyznaczają możliwy wynik asynchronicznej operacji. </li>
+        <li>Może być w 1 z 3 stanów: pending, resolved/fullfilled lub rejected </li>
+        <li>Dzięki nim możemy wykonać jakiś kod, a następnie odpowiednio zareagować na jego wykonanie. Można powiedzieć,
+          żę to taka inna odmiana funkcji callback.</li>
+        <li>Praca z obietnicami w zasadzie zawsze składa się z 2 kroków. Po pierwsze za pomocą konstruktora Promise
+          tworzymy obietnicę. Po drugie za pomocą odpowiedniej funkcji reagujemy na jej zakończenie (konsumujemy ją)
+        </li>
+        <li>Resolve() i reject() to funkcje podawane jako parametr do funkcji wykonawczej. Resolve zmienia status
+          obietnicy z pending na fullfilled</li>
+
+
+        <pre><code class="language-javascript"> 
+        let myPromise = new Promise(function(myResolve, myReject) {
+          // "Producing Code" (May take some time)
+          
+            myResolve(); // when successful
+            myReject();  // when error
+          });
+          
+          // "Consuming Code" (Must wait for a fulfilled Promise)
+          myPromise.then(
+            function(value) { /* code if successful */ },
+            function(error) { /* code if some error */ }
+          );
+
+          //
+          const promise = new Promise((resolve, reject) => {
+            if (zakończono_pozytywnie) {
+                resolve("Wszystko ok 😁");
+            } else {
+                reject("Nie jest ok 😥");
+            }
+           });
+        </code></pre>
+        <li>Każda obietnica może zakończyć się na dwa sposoby - powodzeniem (resolve) i niepowodzeniem (reject).
+          Gdy obietnica zakończy się powodzeniem (np. dane się wczytają), powinniśmy wywołać funkcję resolve(),
+          przekazując do niej rezultat działania. W przypadku błędów powinniśmy wywołać funkcję reject(), do której
+          przekażemy błędne dane lub komunikat błędu. </li>
+        <li>Po stworzeniu nowego obiektu Promise, w pierwszym momencie ma ona właściwości state (w debugerze widoczna
+          jako [[PromiseStatus]] ustawioną na "pending" oraz właściwość value ([[PromiseValue]]), która początkowo
+          wynosi undefined.</li>
+        <li>W momencie zakończenia wykonywania asynchronicznych operacji Promise przechodzi w stan "settled"
+          (ustalony/załatwiony)
+          i zostaje zwrócony jakiś wynik. Status takiego promise przełączany jest odpowiednio w "fulfilled" lub
+          "rejected"</li>
+        <li>Po rozwiązaniu (zakończeniu) Promise możemy zareagować na jego wynik. Służą do tego dodatkowe metody, które
+          Promise nam udostępnia. Pierwszą z tych metoda jest <span class="important">then()</span>, druga to <span
+            class="important">catch()</span> która służy reakcji na błąd, a trzecia to <span
+            class="important">finally()</span> </li>
+        <pre><code class="language-javascript"> 
+function doSomething() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            //resolve("Gotowe dane");
+            reject("Przykładowy błąd"); //uwaga zwracamy błąd
+        }, 1000);
+    });
+}
+
+doSomething()
+    .then(result => {
+        ...
+    })
+    .catch(error => {
+        console.error(error);
+    });
+          </code></pre>
+        <li>Jeśli czynności chcemy zacząć po pozytywnym zakończeniu wszystkich asynchronicznych operacji używamy metody
+          <span class="important">Promise.all()</span> a gdy nie ma znaczenia czy pozytywnie używamy <span
+            class="important">allSettled()</span>
+        </li>
+        <pre><code class="language-javascript">Promise.all([
+loadUser(),
+loadBooks(),
+loadPets(),
+])
+.then(res => {
+    console.log(res);
+})
+.catch(err => {
+    console.log(err);
+})
+    </code></pre>
+        <li> Finally() odpalana jest na zakończenie operacji niezależnie od jej wyniku. Dobra np. do zastopowania
+          wskaźnika ładowania</li>
+        <pre><code class="language-javascript">button.classList.add("loading"); //pokazujemy loading
+button.disabled = true; //i wyłączamy button
+
+fetch("....")
+    .then(res => res.json())
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    .finally(() => {
+        button.classList.remove("loading");
+        button.disabled = false;
+    });        
+      </code></pre>
+
+
+      </ul>
+      <h3> Async i Await</h3>
+      <ul>
+        <li> Używamy ich jako zamiennik konsumowania promisu przy pomocy .then</li>
+        <li>Słowo async postawione przed dowolną funkcją tworzy z niej funkcję asynchroniczną, która zwraca obietnicę
+        </li>
+        <li>Słowo kluczowe await sprawia, że JavaScript poczeka na wykonanie asynchronicznego kodu. Dzięki temu zapis
+          bardzo przypomina synchroniczny kod. Słowa await możemy używać tylko wewnątrz funkcji poprzedzonej słowem
+          async</li>
+        <li>Instrukcja await przed nazwą funkcji, oznacza że kolejna operacja rozpocznie się dopiero, gdy ta funkcja
+          zakonczy dzialanie .</li>
+
+
+
+        <pre><code class="language-javascript">
+function loadUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => { resolve("A"); }, 1000)
+    });
+}
+
+function loadBooks() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => { resolve("B"); }, 1000)
+    });
+}
+
+function loadPets() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => { resolve("C"); }, 1000)
+    });
+}
+
+async function render() {
+    const user = await loadUserData();
+    const books = await loadBooks();
+    const pets = await loadPets();
+    return data;
+}
+</code></pre>
+
+        <div class="code-flow">
+          <pre><code class="language-javascript"> const handleGuess = () => {
+  enterNumber() // This returns a Promise
+    .then((result) => {
+      alert(`Dice: ${result.randomNumber}: you got ${result.points} points`); // When resolve is run, we get the points and the random number 
+      
+      // Let's ask the user if they want to continue the game
+      continueGame().then((result) => {
+        if (result) {
+          handleGuess(); // If yes, we run handleGuess again
+        } else {
+          alert("Game ends"); // If no, we show an alert
+        }
+      });
+    })
+    .catch((error) => alert(error));
+};
+
+handleGuess(); // Run handleGuess function
+    
+  </code></pre>
+          <p>-></p>
+          <pre><code class="language-javascript"> const handleGuess = async () => {
+  try {
+    const result = await enterNumber(); // Instead of the then method, we can get the result directly by just putting await before the promise
+
+    alert(`Dice: ${result.randomNumber}: you got ${result.points} points`);
+
+    const isContinuing = await continueGame();
+
+    if (isContinuing) {
+      handleGuess();
+    } else {
+      alert("Game ends");
+    }
+
+  } catch (error) { // Instead of catch method, we can use the try, catch syntax
+    alert(error);
+  }
+};
+    
+  </code></pre>
+        </div>
+
+      </ul>
+
+    </div>
+    <div class="text-box" id="8">
+      <h2>8. Destructuring</h2>
+      <ul>
+        <li>Przypisanie destrukturyzujące jest wyrażeniem w JavaScript, które pozwala na wyciągnięcie danych z tablic bądź obiektów do odrębnych zmiennych.</li>
+<li>Destrukturyzacja tablic wykonywana jest po kolei, a obiektów po kluczach</li>
+
+
+      </ul>
+      <pre><code class="language-javascript">const tab = ["Ala", "Ola", "Ela"];
+
+/// Klasycznie
+const name1 = tab[0];
+const name2 = tab[1];
+
+/// Za pomocą destrukturyzacji
+const [name1, name2] = tab;
+
+/// Operator rest 
+const tab = [1, 2, 3, 4, 5];
+const [first, ...vars] = tab;
+
+/// Pominięcie 1 wartości
+const [name1, name2, , name4] = tab;
+
+/// Ustawienie domyślnej wartości w razie jej braku
+const [ name1="brak", name2="brak", name3="brak" ] = tab;
+
+/// Destrukturyzacja obiektu
+const obj = {
+  first_name : "Marcin",
+  last_name : "Kowalski",
+}
+const {first_name, last_name} = obj </code></pre>
+    </div>
+
+
+
+    <div class="text-box" id="9">
+      <h2>9. Design patterns</h2>
+<ul>
+<li> Wzorce projektowe to zorientowane obiektowo gotowe rozwiązania popularnych problemów w programowaniu</li>
+<li> todo: Facade, State, Decorator, Publisher, Mediator, Constructor, Prototype, Command</li>
+
+</ul>
+  
+
+     
+     
+      <h3> Singleton
+      </h3>
+      <ul>
+        <li>Singleton jest wzorcem, który pozwala na stworzenie tylko jednej instancji obiektu z klasy bądź konstruktora funkcyjnego.  Jest jednym z mniej popularnych i mniej stosowanych wzorców projektów </li>
+        <li>W przypadku wielokrotnego wywoływania tej samej klasy zawsze będziemy otrzymywali tą samą instancję, która została stworzona podczas pierwszego wywołania. </li>
+        <li>Zastosowania:
+           <ul><li>Obiekty konfiguracyjne - nie chcemy za każdym razem generować nowego obiektu, możemy zwracać to co już wygenerowane</li>
+          <li>Połączenie z bazą danych - zazwyczaj chcemy ustanowić jedno połączenie z bazą danych, a nie inicjować wiele połączeń przy kazdym zapisie</li>
+          <li>Logger danych</li>
+          </ul>
+
+          </li>
+          <pre><code class="language-javascript">/// Implementacja z użyciem klasy
+class AppConfig { 
+  constructor(number = 5){ 
+      if(AppConfig.exists){ 
+        return AppConfig.instance 
+      } 
+      this.randomNumber = Math.random();
+      this.number = number;
+      AppConfig.exists = true; 
+      AppConfig.instance = this; 
+      return this 
+  }  
+} 
+
+const configObject = new AppConfig(8);
+const configObject2 = new AppConfig(1);
+
+/// Obiekty zwrócone na koniec są identyczne
+console.log(configObject);
+console.log(configObject2);
+console.log(configObject === configObject2); // true                      </code></pre>
+      </ul>
+
+
+      <h3>
+        Strategia
+      </h3>
+      <ul>
+        <li>
+          Wzorzec strategii definiuje rodzinę algorytmów, z których każdy zdefiniowany jest w osobnej klasie implementującej wspólny interfejs - dzięki temu możliwe jest wymienne stosowanie każdego z tych algorytmów, nie będąc zależnymi od klas klienckich.
+        </li>
+        <li>Wzorzec strategii definiuje alternatywne algorytmy (lub strategie) będące rozwiązaniem jakiegoś zadania. Pozwala na wymianę metod i przetestowanie ich niezaleznie od klienta. Strategia to grupa algorytmów które są wymienne</li>
+      <li>Kontekst dostarcza interfejs różnym Strategiom umożliwiając wywołanie algorytmów do kalkulacji</li>
+      <pre><code class="language-javascript">var Shipping = function () {
+  this.company = "";
+};
+
+Shipping.prototype = {
+    setStrategy: function (company) {
+        this.company = company;
+    },
+
+    calculate: function (package) {
+        return this.company.calculate(package);
+    }
+};
+
+var UPS = function () {
+    this.calculate = function (package) {
+        // calculations...
+        return "$45.95";
+    }
+};
+
+var USPS = function () {
+    this.calculate = function (package) {
+        // calculations...
+        return "$39.40";
+    }
+};
+
+var Fedex = function () {
+    this.calculate = function (package) {
+        // calculations...
+        return "$43.20";
+    }
+};
+
+function run() {
+
+    var package = { from: "76712", to: "10012", weigth: "lkg" };
+
+    // the 3 strategies
+
+    var ups = new UPS();
+    var usps = new USPS();
+    var fedex = new Fedex();
+
+    var shipping = new Shipping();
+
+    shipping.setStrategy(ups);
+    console.log("UPS Strategy: " + shipping.calculate(package));
+    shipping.setStrategy(usps);
+    console.log("USPS Strategy: " + shipping.calculate(package));
+    shipping.setStrategy(fedex);
+    console.log("Fedex Strategy: " + shipping.calculate(package));
+}    </code></pre>
+      </ul>
+
+
+
+      <h3> Observer</h3>
+      <ul>
+        <li>Observer design pattern jest behawioralnym wzorcem projektowym w którym jeden obiekt nazywany Subject lub Observable informuje wszystkie inne obserwujące go obiekty o zmianach w jego wewnętrznym stanie. Inne obiekty wtedy zareagują na tę zmianę i obsłużą ją zgodnie z wymaganiami. Informowanie najczęściej jest realizowane przez wywołanie jednej z metod obserwatora. </li>
+      <li>The Observer pattern offers a subscription model in which objects subscribe to an event and get notified when the event occurs. This pattern is the cornerstone of event driven programming, including JavaScript. </li>
+      <li>Budując aplikacje używamy wielu event handlerów, czyli funkcji które zostaną poinformowane gdy zostanie wywołany jakiś event. Informacje mogą zawierać parametry</li>
+      <li>Ta relacja eventów i event-handlerów jest manifestacją wzorca Obserwatora w Javascript.</li>
+      <li>Wzorzec Obserwatora składa się z następujących obiektów</li>
+      <ul><li>Subject - zawiera listę dowolnej liczby subskrybentów,implementuje interfejs który pozwala im włączać i wyłączac subskrypcję, wysyła powiadomienia w momencie zmiany stanu </li>
+      <li>Obserwatorzy - posiada funkcję która może być wywołana gdy zmieni się stan Subjecta (np. zdarzy się event)</li>
+      </ul>
+
+      <pre><code class="language-javascript">function Click() {
+    this.handlers = [];  // observers
+}
+
+Click.prototype = {
+
+    subscribe: function (fn) {
+        this.handlers.push(fn);
+    },
+
+    unsubscribe: function (fn) {
+        this.handlers = this.handlers.filter(
+            function (item) {
+                if (item !== fn) {
+                    return item;
+                }
+            }
+        );
+    },
+
+    fire: function (o, thisObj) {
+        var scope = thisObj || window;
+        this.handlers.forEach(function (item) {
+            item.call(scope, o);
+        });
+    }
+}
+
+function run() {
+
+    var clickHandler = function (item) {
+        console.log("fired: " + item);
+    };
+
+    var click = new Click();
+
+    click.subscribe(clickHandler);
+    click.fire('event #1');
+    click.unsubscribe(clickHandler);
+    click.fire('event #2');
+    click.subscribe(clickHandler);
+    click.fire('event #3');
+}   </code></pre>
+
+      </ul>
+
+      <h3> Module
+      </h3>
+      <ul>
+        <li>-</li>
+      </ul>
+
+      <h3>Revealing Module</h3>
+      <ul>
+        <li>Wzorzec projektowy który umożliwia podzielenie kody na moduły i zapewnia lepszą strukturę kodu. Daje możliwosć tworzenia publicznych i prywatnych zmiennych i unikania globalnego scope'u.</li>
+      <li> Wzorzec ten używa IIFE, wewnątrz których umieszczane są funkcje/zmienne które można wywołać tylko odwołując się do nazwy rodzica</li>  
+      <pre><code class="language-javascript"> var namesCollection = (function() {
+  // private members
+  var objects = [];
+  
+  // Public Method
+  function addObject(object) {
+      objects.push(object);
+      printMessage(object);
+  }
+
+  // Private Method
+  function printMessage(object) {
+      console.log("Object successfully added:", object);
+  }    // public members, exposed with return statement
+  return {
+      addName: addObject,
+  };
+})();
+
+namesCollection.addObject()
+        
+        </code></pre>
+      </ul>
+
+
+      <h3> Factory</h3>
+      <ul>
+        <li>To funkcje, które tworzą i zwracają obiekty. Głównym celem stosowania tego wzorca jest „produkowanie” obiektów związanych z jednym wspólnym interfejsem</li>
+        <li>Używając „Fabryki” w kodzie nie interesuje nas za bardzo, w jaki sposób ten obiekt zostanie stworzony. My jedynie podajemy „parametry” i oczekujemy na dostarczenie prawidłowo „wyprodukowanego” obiektu.</li>
+        <li>Jeśli obiektów jest bardzo dużo (10 000+), warto użyć klas które są bardziej wydajne</li>
+        <li>Pamiętajmy, że Simple Factory, jest jedynie wzorcem, a nie nowym sposobem na tworzenie obiektów. Fabryka jedynie decyduje jaki obiekt i w jaki sposób stworzyć. </li>
+        <li>Dzięki temu będziemy tworzyć obiekty zawsze za pomocą tego samego interfejsu a ewentualne zmiany, poprawki, dodatkowe funkcjonalności będziemy już wykonywać w samej fabryce. Dzięki temu nasz kod będzie łatwiejszy w utrzymaniu i łatwo skalowalny. </li>
+ 
+               <pre><code class="language-javascript">var Factory = function () {
+  this.createEmployee = function (type) {
+      var employee;
+
+      if (type === "fulltime") {
+          employee = new FullTime();
+      } else if (type === "parttime") {
+          employee = new PartTime();
+      } else if (type === "temporary") {
+          employee = new Temporary();
+      } else if (type === "contractor") {
+          employee = new Contractor();
+      }
+
+      employee.type = type;
+
+      employee.say = function () {
+          console.log(this.type + ": rate " + this.hourly + "/hour");
+      }
+
+      return employee;
+  }
+}
+
+var FullTime = function () {
+  this.hourly = "$12";
+};
+
+var PartTime = function () {
+  this.hourly = "$11";
+};
+
+var Temporary = function () {
+  this.hourly = "$10";
+};
+
+var Contractor = function () {
+  this.hourly = "$15";
+};
+
+function run() {
+
+  var employees = [];
+  var factory = new Factory();
+
+  employees.push(factory.createEmployee("fulltime"));
+  employees.push(factory.createEmployee("parttime"));
+  employees.push(factory.createEmployee("temporary"));
+  employees.push(factory.createEmployee("contractor"));
+
+  for (var i = 0, len = employees.length; i < len; i++) {
+      employees[i].say();
+  }
+}
+</code></pre>
+       
+
+      </ul>
+
+    </div>
+
+    <div class="text-box" id="10">
+      <h2>10. Programowanie funkcyjne</h2>
+      <ul>
+        <li>Paradygmat programowania wg którego w większości przypadków piszemy kod używając funkcji, które nie używają danych z zewnętrznego scope'u i mutacji obiektów.</li>
+        <li>Pozwala pisać kod z mniejszą ilością błędów, łatwiejszy do obsługi i w krótszym czasie. Funkcje nie mają efektów ubocznych i są immutable </li>
+        <li>Programowanie funkcyjne nie pozwala na mutacje danych lub współdzielony stan, funkcje powinny pozostać czyste (pure functions)</li>
+        <li>W Javascript funkcje są obiektami <span class="important">pierwszej klasy</span>, czyli są traktowane jako wartość, przez co mogą być
+          <ul><li>Przechowywane w zmiennej, obiekcie lub tablicy</li>
+          <li>Przekazane jako argument do funkcji</li>
+          <li>Zwrócone z funkcji</li>
+          </ul>
+          
+            <li> <span class="important">Funkcje wyższego rzędu</span> to funkcje, które otrzymują inną funkcję jako argument i opcjonalnie mogą zwracać funkcję</li>
+        <li>Mechanizm łączenia funkcji z użyciem funkcji wyższego rzędu nazywamy<span class="important">komponowaniem</span>  </li>
+        <li> W JS funkcje mozna traktować jak wartości. Można to wykorzystać do dzielenia kodu
+          na mniejsze funkcje i komponować je używając funkcji wyższego rzędu</li>
+
+      </ul>
+
+      <h3> Domknięcia (closures) </h3>
+      <ul>
+        <li>Domknięcie jest funkcją skojarzoną z odwołującym się do niej środowiskiem. Oznacza to, że funkcja ma dostęp do wszystkiego na poziomie jej zakresu i wyżej</li>
+        <li>W wielu językach programowania funkcja nie ma zasięgu do elementów poza nią. W Javascript dostęp zapewniają domknięcia</li>
+        <li>Najczęściej o użyciu domknięć mówi się w kontekście umieszczania funkcji wewnątrz funkcji</li>
+        <li>Przykładem użycia domknięć są funkcje jak fetch(), gdzie wszystkie funkcje po .then mają dostęp do obiektu zwróconego w obietnicy.</li>
+        <pre><code class="language-javascript">function makeAdder(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+
+console.log(add5(2));  // 7
+console.log(add10(2)); // 12
+        </code></pre>
+    
+    
+      </ul>
+
+
+      <h3> Funkcje Filter i Reject</h3>
+      <ul>
+        <li> Można nią zastąpić pętlę for. Funkcja filter loopuje przez elementy tablicy i przekazuje je do callback
+          function (podanej w argumencie)</li>
+
+        <li>
+          Iteruje przez tablicę. Jako argument podajemy inną funkcję która zwraca jakąś wartość.
+        </li>
+        <li> Funkcja filter tworzy nową wersję tablicy, "przefiltrowaną" wg podanego warunku</li>
+        <li> Funkcja reject to odwrotność funkcji filter</li>
+      </ul>
+      <pre><code class="language-javascript"> 
+var animals = [
+  { name: 'Fluffykins', species: 'rabbit' },
+  { name: 'Caro',       species: 'dog' },
+  { name: 'Hamilton',   species: 'dog' },
+  { name: 'Harold',     species: 'fish' },
+  { name: 'Ursula',     species: 'cat' },
+  { name: 'Jimmy',      species: 'fish' }
+]
+
+var names = animals.filter(function(animal) { 
+  return animal.species === 'dog'
+})
+
+
+    </code></pre>
+
+
+
+
+
+
+
+
+
+
+      <h3> Funkcja Map</h3>
+      <ul>
+        <li>
+          Iteruje przez tablicę. Jako argument podajemy inną funkcję która zwraca jakąś wartość.
+        </li>
+        <li> Można nią zastąpić pętlę for</li>
+      </ul>
+      <pre><code class="language-javascript"> 
+var animals = [
+  { name: 'Fluffykins', species: 'rabbit' },
+  { name: 'Caro',       species: 'dog' },
+  { name: 'Hamilton',   species: 'dog' },
+  { name: 'Harold',     species: 'fish' },
+  { name: 'Ursula',     species: 'cat' },
+  { name: 'Jimmy',      species: 'fish' }
+]
+
+var names = animals.map(function(animal) { 
+  return animal.name
+})
+
+~~~~ES6
+var names = animals.map((x) => x.name)
+    </code></pre>
+
+      <h3> Funkcja Reduce</h3>
+      <ul>
+        <li>
+          Funkcja obiektu tablicy. Akceptuje DWA argumenty
+        </li>
+        <li> Można nią zastąpić pętlę for</li>
+      </ul>
+      <pre><code class="language-javascript"> 
+var animals = [
+{ name: 'Fluffykins', species: 'rabbit' },
+{ name: 'Caro',       species: 'dog' },
+{ name: 'Hamilton',   species: 'dog' },
+{ name: 'Harold',     species: 'fish' },
+{ name: 'Ursula',     species: 'cat' },
+{ name: 'Jimmy',      species: 'fish' }
+]
+
+var names = animals.map(function(animal) { 
+return animal.name
+})
+
+~~~~ES6
+var names = animals.map((x) => x.name)
+  </code></pre>
+    </div>
+
+    <div class="text-box" id="11">
+      <h2>11. Storage & Cookies</h2>
+      <ul>
+        <li>Przeglądarki udostępniają nam interfejs <span class="important">Storage</span>, który służy do przetrzymywania danych. Jest to taki swoisty schowek, w którym możemy przetrzymywać różne dane naszej strony. Dostęp do takiego schowka ma tylko dana strona w danej przeglądarce danego użytkownika.  </li>
+        <li>Interfejs Storage składa się z session storage oraz local storage. Ten pierwszy służy do obsługi danych tylko w czasie trwania sesji (czyli do zamknięcia przeglądarki). Ten drugi służy do zapisywania danych na nieokreślony czas (aż do ich usunięcia). Obu używa się identycznie </li>
+<li>Aby utworzyć nowy element w localStorage możemy skorzystać z funkcji setItem(), lub dodać nową właściwość tak samo jak do każdego innego obiektu: </li>
+<li>Przy odczycie sytuacja jest bardzo podobna. Możemy użyć funkcji getItem() lub odwołać się tak samo jak przy innych obiektach</li>
+<pre><code class="language-javascript">localStorage.setItem("myElement", "Przykładowa wartość"); //zalecany sposób
+localStorage.myElement = "Przykładowa wartość";
+localStorage["myElement"] = "Przykładowa wartość"
+
+const element = localStorage.getItem("myElement"); //zalecany sposób
+const element = localStorage.myElement;
+const element = localStorage["myElement"];
+</code></pre>
+
+<li>Domyślnie localStorage podobnie do dataset umożliwia przetrzymywanie danych jako tekst. Aby móc przetrzymywać w nim obiekty (w tym tablice), musimy je zamienić na tekst za pomocą funkcji JSON.stringify() oraz pobierając odmienić JSON.parse:  </li>
+<pre><code class="language-javascript">const ob = {
+    one: 1,
+    two: 2,
+    three: 3
+};
+
+localStorage.setItem("obj", JSON.stringify(ob));
+
+const retrievedObject = JSON.parse(localStorage.getItem("obj"));
+console.log(retrievedObject);
+</code></pre>
+
+<li>Aby usunąć element z localStorage, skorzystamy z funkcji localStorage.removeItem()</li>
+<pre><code class="language-javascript">localStorage.removeItem("element")</code></pre>
+<li>Jeżeli chcemy wyczyścić cały localStorage dla danej witryny, posłużymy się funkcją localStorage.clear()</li>
+<pre><code class="language-javascript">if (confirm("Czy chcesz wyczyścić zapisane dane?")) {
+  localStorage.clear()
+}</code></pre>
+
+
+
+
+</ul>
+<h3>Cookies</h3>
+<ul>
+  <li>Ciasteczka są to małe ilości danych, które są przechowywane na twoim komputerze za pomocą plików tekstowych i wysyłane są do serwera z żądaniami HTTP. Takie pliki zawierają w sobie króciutkie informacje takie jak np. id usera, jakiś zakodowany numer, ostatnią wizytę, numer aktualnej sesji itp
+
+  </li>
+  <li>Bardzo często ciasteczka służą do komunikacji przeglądarka-serwer,</li>
+<li>Jeśli serwer przesyła ciasteczko, w nagłówkach pojawia się 'Set-Cookie'. Przeglądarka zachowuje ciateczko i następnie przy każdym requescie wysyła je w skróconej formie z nagłówkiem 'Cookie'</li>
+<li>Ciasteczka to jeden duży ciąg danych, który możemy podzielić funkcją .split. </li>
+<li> Parametry ciasteczka</li>
+<ul>
+  <li>path - określa które podstrony mają do niego dostęp</li>
+  <li>domain - domena z której będzie dostęp do ciateczka, domyślnie dotyczy tylko domeny z której zostały ustawione</li>
+  <li>expires/max-age - ustawienie jak długo ciasteczko będzie aktywne</li>
+  <li>secure - http/https</li>
+</ul>
+
+<pre><code class="language-javascript">/// Utworzenie ciasteczka
+document.cookie = "nazwa=wartosc"
+
+/// Utworzenie ciasteczka wraz z enkodowaniem
+document.cookie = encodeURIComponent("nazwa użytkownika") + "=" + encodeURIComponent("Karol Nowak");
+
+/// Przykładowe ciasteczko, składa się z kilku części
+document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT; secure"</code></pre>
+
+
+</ul>
+
+    </div>
+
+    <div class="text-box" id="12">
+      <h2>12. Testing</h2>
+      <ul>
+        <li></li>
+
+
+      </ul>
+
+    </div>
+
+    <div class="text-box" id="13">
+      <h2>13. Iteratory i generatory</h2>
+      <h3>Sposoby na iterowanie po obiektach</h3>
+      <ul>
+<li>Pętla for...in - iteruje po kluczach obiektu</li>
+<pre><code class="language-javascript">const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3" </code></pre>
+<li>Pętla for...of - iteruje po właściwościach obiektu</li>
+<pre><code class="language-javascript">const array1 = ['a', 'b', 'c'];
+
+for (const element of array1) {
+  console.log(element);
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c" </code></pre>
+<li>Metoda .forEach na tabeli kluczy i/lub wartości</li>
+<pre><code class="language-javascript">Object.keys(myObj).forEach((key) => {
+  let val = myObj[key];
+  // do something with key and val
+}); </code></pre>
+<li>Metoda .map na tabeli kluczy i/lub wartości</li>
+<pre><code class="language-javascript">Object.values(myObj).map(val => ... )
+Object.entries(myObj).map(([key, val]) => ({
+  [key]: val
+})) </code></pre>
+
+
+
+
+      </ul>
+
+      <h3>Sposoby na iterowanie po tablicach</h3>
+      <ul>
+        <li>Pętle for i while</li>
+        <li>Pętla for...of</li>
+        <li>Funkcja forEach()</li>
+        <li>Funkcja map()</li>
+        <li>Funkcja filter()</li>
+        <li>Funkcja reduce()</li>
+      </ul>
+
+<h3>Pętla for...of i generatory</h3>
+      <ul>
+        <li>Wprowadzona w ES5 pętla for...of pozwala iterować praktycznie po każdej strukturze
+          danych. W Javascript funkcje zwracające iteratory zaimplementowane są pod kluczami Symbol.iterator</li>
+        <li>Iterować można po typach: arrays, strings, Maps/Sets, kolekcje DOM</li>
+        <li>Każdy z tych typów danych ma zaimplementowaną metodę, która zwraca tak zwany Iterator, czyli obiekt który
+          potrafi odwołać się do kolejnych elementów z danej struktury, a równocześnie wywoływany w sekwencji potrafi
+          zapamiętać swoją bieżącą pozycję. Taki obiekt zawiera metodę next(), która służy do zwracania kolejnego
+          elementu w kolekcji. </li>
+        <pre><code class="language-javascript">
+            const tab = ["Ala", "Bala", "Cala"];
+
+            for (const el of tab) {
+                console.log(el); //"Ala", "Bala", "Cala"...
+            }
+            
+            const iter = tab[Symbol.iterator]();
+            iter.next(); //{value: "Ala", done: false}
+            iter.next(); //{value: "Bala", done: false}
+            iter.next(); //{value: "Cala", done: false}
+            iter.next(); //{value: undefined, done: done}
+
+          </code></pre>
+        <li>Implementacja iteratorów dla innych obiektów jest problematyczna, dlatego wprowadzono <span
+            class="important">generatory</span></li>
+        <li>Funkcja staje się generatorem, gdy zawiera przynajmniej jedno wystąpienie słowa yield, oraz przy jej
+          deklaracji pojawia się znak *. Generator automatycznie zwraca metodę next(), która przy każdorazowym użyciu
+          będzie zwracać kolejne wystąpienia yield:</li>
+        <pre><code class="language-javascript">
+  function* tabLoop() {
+    const tab = ["ala", "bala", "cala"];
+
+    for (const el of tab) {
+        yield el;
+    }
+}
+
+const gen = tabLoop();
+gen.next(); //{value: "ala", done: false}
+gen.next(); //{value: "bala", done: false}
+gen.next(); //{value: "cala", done: false}
+gen.next(); //{value: undefined, done: true} 
+</code></pre>
+        <li>Implementacja w obiekcie</li>
+        <pre><code class="language-javascript">
+const ob = {
+    names: ["Ala", "Bala", "Cala"],
+
+    *[Symbol.iterator]() {
+        for (const el of this.names) {
+            yield el;
+        }
+    }
+}
+
+const iterator = ob[Symbol.iterator]();
+iterator.next(); //{value: "Ala", done: false}
+iterator.next(); //{value: "Bala", done: false}
+iterator.next(); //{value: "Cala", done: false}
+iterator.next(); //{value: undefined, done: true}
+
+for (const el of ob) {
+    console.log(el); //"Ala", "Bala", "Cala"...
+}
+</code></pre>
+        <li>Javascript udostępnia nam dodatkowo kilka funkcji, dzięki którym możemy w przyjemniejszy sposób iterować po
+          wartościach czy kluczach danego obiektu.</li>
+        <img src="images/gen.png">
+        <pre><code class="language-javascript">
+  const car = {
+    brand : "BMW",
+    color : "red",
+    speed : 150
+}
+
+for (const key of Object.keys(car)) {
+    console.log(key); //brand, color, speed
+}
+
+for (const val of Object.values(car)) {
+    console.log(val); //"BMW", "red", 150
+}
+
+for (const [key, val] of Object.entries(car)) {
+    console.log(key, val); //[brand, "BMW"], [color, "red"], [speed, 150]
+}
+
+//...
+//pętli for of bezpośrednio po powyższym obiekcie nie zrobimy, bo nie zaimplementowaliśmy
+//mu funkcji *[Symbol.iterator]()
+
+</code></pre>
+
+
+      </ul>
+
+    </div>
+    <div class="text-box" id="14">
+      <h2>14. Moduły</h2>
+      <ul>
+        <li>Dołączając do index.html pliki ze skryptami są one traktowane jak jeden duży skrypt. Oznacza to, że bez
+          problemu możemy z jednego pliku odwołać się do zmiennych z innego pliku, ale też powoduje to, że nie możemy
+          ponownie zadeklarować takiej samej zmiennej (chyba, że wrzucimy ją w jakiś blok lub funkcję). </li>
+        <li>Dlatego wprowadzono mechanizm modułów, aby każdy oddzielny plik był zamkniętym środowiskiem z własnymi
+          zmiennymi</li>
+        <li>Jeżeli chcemy coś wystawić na zewnątrz stosujemy instrukcję <span class="important">export</span>.
+          Jeżeli chcemy coś zaimportować, stosujemy <span class="important">import:</span> </li>
+        <pre><code class="language-javascript">//plik functions.js ------
+function smallText(txt) {
+    return txt.toLowerCase();
+}
+
+function bigText(txt) {
+    return txt.toUpperCase();
+}
+
+function mixText(txt) {
+    return [...txt].map((el, i) => i%2 === 0 ? el.toLowerCase() : el.toUpperCase());
+}
+
+export { smallText, bigText, mixText }
+
+//plik app.js ------
+import { smallText, bigText } from "./functions"; //wybieramy rzeczy do eksportu
+
+console.log( smallText("Ala ma kota") ); //ala ma kota
+console.log( bigText("Ala ma kota") ); //ALA MA KOTA
+          </code></pre>
+        <li>Eksportowanie pojedynczych elementów indywidualnie</li>
+        <pre><code class="language-javascript">//functions.js
+
+function smallText() { }
+function bigText() { }
+function mixText() { }
+export { smallText, bigText, mixText }
+
+//lub
+
+export function smallText() { }
+export function bigText() { }
+export function mixText() { }
+
+//plik app.js
+
+import { smallText, bigText, mixText } from "./functions";
+
+//lub
+
+import { smallText } from "./functions";
+import { bigText } from "./functions";
+import { mixText } from "./functions.js";
+
+/// import wielu rzeczy pod wspólną nazwą
+import * as fn from "./functions";
+
+fn.smallText();
+fn.bigText();
+fn.mixText();
+</code></pre>
+      </ul>
+
+    </div>
+    <div class="text-box" id="15">
+      <h2>15. Zasady pisania dobrego kodu</h2>
+
+      <ul>
+        <li>Jak najmniej zmiennych globalnych</li>
+        <li> Przykłady refactorowania kodu </li>
+        <div class="code-flow">
+          <pre><code class="language-javascript"> 
+            function toAccounting(n) {
+              if (n < 0) {
+                return '(' + Math.abs(n) + ')'
+              } else {
+                return n.toString()
+              }
+            }
+            
+            console.log(toAccounting(undefined))
+            console.log(toAccounting(0))
+            console.log(toAccounting(10))
+            console.log(toAccounting(-5))
+          </code></pre>
+          <p>-></p>
+          <pre><code class="language-javascript"> 
+function numberToAccountingString(number) {
+  if (number == null) return
+  if (number < 0) return `(${Math.abs(number)})`
+  return number.toString()
+}
+
+console.log(numberToAccountingString(undefined))
+console.log(numberToAccountingString(0))
+console.log(numberToAccountingString(10))
+console.log(numberToAccountingString(-5))
+
+
+          </code></pre>
+        </div>
+
+
+
+      </ul>
+
+    </div>
+
+    <div class="text-box" id="16">
+      <h2>16. Różne</h2>
+      <ul>
+        <li>Jeśli condition jest true to value1, a jak false to value2
+          <pre><code class="language-javascript">condition ? value1 : value2 </code></pre>
+        </li>
+
+
+
+      </ul>
+      <h3>Strict mode</h3>
+      <ul>
+        <li>Strict mode to funkcjonalność wprowadzona w ES5, która pozwala odpalać nasz skrypt w
+          bardziej restrykcyjnym trybie - tak zwanym "strict mode". </li>
+        <li>Tryb ten eliminuje niektóre "ciche" błędy (takie, które nie są sygnalizowane przez przeglądarkę) wynikające
+          z przestarzałych rozwiązań, lepiej sygnalizuje powszechne kodowe wpadki oraz niebezpieczne operacje. </li>
+        <li>Gdy nasz kod piszemy z wykorzystaniem modułów w ES6 lub wykorzystując klasy, nie musimy wtedy używać
+          powyższego przełącznika, ponieważ w obydwu przypadkach strict mode jest włączone. </li>
+        <li>Dokładny opis <a
+            href="https://kursjs.pl/kurs/super-podstawy/strict-mode.php">https://kursjs.pl/kurs/super-podstawy/strict-mode.php</a>
+        </li>
+      </ul>
+
+      <h3>Wczytywanie grafik</h3>
+      <ul>
+        <li>Obiekty wczytywane (np. window, image, iframe itp.) posiadają zdarzenie load, które wykrywa, czy dany obiekt
+          został w pełni załadowany. </li>
+        <li>Właściwość complete wskazuje czy dany np. obrazek jest wczytany czy nie </li>
+
+
+
+        <pre><code class="language-javascript"> 
+//tablica z nazwami obrazków do załadowania
+const imgNames = [
+    "obrazek1.gif",
+    "obrazek2.gif",
+    "obrazek3.gif",
+    "obrazek4.gif",
+    "obrazek5.gif",
+    "obrazek6.gif"
+];
+
+const loadingStep = (100 / imgNames.length); //szerokość oznaczająca % paska po załadowaniu 1 obrazka
+
+const images = []; //tablica będzie zawierała obiekty Image
+
+const loading = document.querySelector(".loading");
+const loadingBar = loading.querySelector(".loading-progress");
+
+//funkcja rozpoczynająca ładowanie obrazków
+function startLoading(cb) {
+    imgNames.forEach(name => {
+        const img = new Image();
+        //po wczytaniu grafiki wrzucam nowe Image() do tablicy images
+        //sprawdzam ile elementów ma ta tablica i na tej podstawie ustawiam szerokość paska postępu
+
+        img.addEventListener("load", e => {
+            images.push(img);
+            loadingBar.style.width = `${images.length * loadingStep}%`; //zmieniamy szerokość paska w %
+
+            if (images.length >= imgNames.length) {
+                cb(); //odpalam jakąś funkcję po zakończeniu wczytywania
+            }
+        });
+        img.src = name;
+
+        if (img.complete) {
+            img.dispatchEvent(new Event("load"));
+        }
+    });
+}
+
+startLoading(function() {
+    alert("Zakończono wczytywanie")
+});        
+  </code></pre>
+
+        <li> Wczytywanie to proces asynchroniczny, więc jest to idealne miejsce by zastosować obietnice lub async/await.
+        </li>
+        <li>Lazy loading to metoda wczytywania obrazków polegająca na tym, że dany obrazek wczytywany jest dopiero w
+          momencie gdy pojawi się na ekranie.</li>
+
+      </ul>
+      <h3>Spread syntax i operator Rest</h3>
+      <ul>
+        <li>Spread syntax, to nowy zapis, który umożliwia rozbijanie iterowanej wartości na składowe.</li>
+        <pre><code class="language-javascript">
+//rozbijanie tablicy na poszczególne liczby
+const tab = [1, 2, 3, 4];
+console.log(...tab); //1, 2, 3, 4
+
+//kopiowanie tablicy
+const tab2 = [...tab];
+
+//łączenie tablic
+const tabPart = [3, 4]
+const tabFull = [1, 2, ...tabPart, 5, 6]; //1, 2, 3, 4, 5, 6
+
+//rozdzielanie tekstu na poszczególne litery
+const str = "Ala ma kota";
+const tab = [...str]; //["A", "l", "a", " ", "m", "a", " ", "k", "o", "t", "a"]
+</code></pre>
+        <li>Identycznie jak spread syntax wygląda rest parameter, różnicą jest miejsce użycia - w tym przypadku jako
+          parametr funkcji.
+          Zapis ten umożliwia zbieranie w jedną zmienną (będącą tablicą) wielu parametrów przekazywanych do funkcji.
+          Musi w parametrach występować jako ostatni</li>
+        <pre><code class="language-javascript">
+function myF(...param) {
+      const newTab = [...param];
+      newTab.push("Ala");
+      console.log(param, newTab); //[1,2,3], [1,2,3,"Ala"]
+}
+  
+myF(1,2,3);
+  //pobieranie "pozostałych" wartości z tablicy
+function printAbout(name = "Ala", ...other) {
+    console.log("To jest " + name);
+
+    if (other.length) {
+        console.log(`${name} ma zwierzaki: ${other.join()}`);
+    }
+}
+
+printAbout("Marcin", "pies", "kot"); //To jest Marcin. Marcin ma zwierzaki: pies,kot
+printAbout(); //To jest Ala
+    </code></pre>
+      </ul>
+
+      <h3>Interpolacja i funkcje tagujące</h3>
+      <ul>
+        <li>Interpolacja to zapis, za pomocą którego w łatwy sposób możemy do wnętrza tekstu wstawiać inne wartości.
+          Bezpośrednio do takiego tekstu możemy wstawiać kod JavaScript, w tym wywoływanie funkcji, zmienne itp: </li>
+        <li>Funkcje tagujące to funkcje, które umożliwiają przekształcanie template strings. Są to zwykłe funkcje -
+          jedyną różnicą jest sposób ich użycia. Jeżeli chcemy danej funkcji użyć jako funkcji tagującej, jej nazwę
+          podajemy tuż przed początkiem template string. </li>
+        <li>Do funkcji takiej automatycznie są przekazywane w pierwszym parametrze poszczególne części template string
+          (znajdujące się między zmiennymi), a do kolejnych parametrów zostaną przekazane kolejne zmienne użyte wewnątrz
+          tekstu.</li>
+        <pre><code class="language-javascript">const formatString = (parts, ...vars) => {
+    let str = "";
+    parts.forEach((el, i) => {
+        str += el;
+        if (vars[i]) str += `${vars[i].toFixed(2)}zl`;
+    });
+    return str;
+}
+
+const price = 2000;
+const diff = 150;
+
+const text = formatString`Cena produktu A to ${price} i jest o ${diff} tańsza od produktu B`;
+
+console.log(text); //"Cena produktu A to 2000.00zl i jest o 150.00zl tańsza od produktu B"
+</code></pre>
+
+
+      </ul>
+
+      <h3>Garbage Collector</h3>
+      <ul>
+        <li>W Javascript podobnie do wielu języków wysokopoziomowych stosuje się automatyczne zarządzanie pamięcią czyli
+          mechanizm zwany Garbage Collection. Oznacza to, że gdy tworzymy nowe obiekty, Javascript automatycznie
+          przydziela im pamięć, a gdy nie są już przez nas używane, są one z niej automatycznie usuwane</li>
+        <li>Garbage Collector cyklicznie co jakiś czas rozpoczyna swoją pracę od głównego obiektu. Oznacza go jako
+          obiekt z referencją (mark). Następnie poprzez jego odwołania przechodzi do innych obiektów - je także
+          oznaczając. Następnie GC sprawdza te obiekty i ich odwołania do kolejnych obiektów, oznacza je i tak dalej, aż
+          dojdzie do końca. Po oznaczeniu wszystkich obiektów do których prowadzą jakiekolwiek referencje, GC zaczyna
+          usuwać obiekty nieużywalne, do których nie było żadnych odwołań.</li>
+        <li> Oznacza to że jeśli pod zmienną prowadzącą do obiektu podstawimy coś innego to GC usuwa ten obiekt z
+          pamięci, ale jeśli w innym miejscu kodu istnieje inna referencja do tego obiektu to nie zostaje on usunięty.
+        </li>
+      </ul>
+
+      <h3>Symbole</h3>
+      <ul>
+        <li>Typ danych symbol to prymitywny typ danych, który zawsze zawiera unikalną wartość. Nie wiemy ile ona wynosi,
+          wiemy jedynie to, że jest unikalna, niepowtarzalna. Aby wygenerować taką wartość, posłużymy się funkcją
+          Symbol()</li>
+        <li>Podczas generowania symbolu możemy podać dodatkową opcjonalną wartość, która będzie opisem danego symbolu.
+          Opis ten nie zmienia wartości, a najczęściej używany jest do celów debugowania.</li>
+        <li>Symbole przydają się w sytuacjach gdzie chcemy dodawać do obiektów dodatkowe funkcjonalności, a równocześnie
+          nie chcemy się martwić o to, że przypadkowo w takim obiekcie coś nadpiszemy. </li>
+        <li>Właściwości kryjące się za symbolem nie są dodatkowo iterowalne, więc idealnie nadają się do tworzenia
+          "ukrytych" właściwości:</li>
+        <pre><code class="language-javascript">
+            const person = {
+              firstName: "John",
+              lastName: "Doe",
+              age: 50,
+              eyeColor: "blue"
+            };
+            
+            let id = Symbol('id');
+            person[id] = 140353;
+            // Now Person[id] = 140353
+            // but person.id is still undefined 
+
+          </code></pre>
+
+      </ul>
+      <h3>Hoisting</h3>
+      <ul>
+        <li>Zmienne i funkcje w Javascript przed wykonaniem kodu są umieszczone w przeznaczonej dla nich przestrzeni w pamięci, stając się od razu dostępne w momencie rozpoczęcia wykonywania kodu.</li>
+        <li>Zmienne var są hoistowane z wartością undefined</li>
+      </ul>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>

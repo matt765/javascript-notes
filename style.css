@@ -1,14 +1,16 @@
 html {
     scroll-behavior: smooth;
+    box-sizing: border-box;
   }
 body {
-
+  box-sizing: border-box;
     color: white;
     font-family: 'Roboto';
     line-height: 35px;
     font-size: 20px;
     background: rgba(36, 35, 35, 0.993);
-   
+   margin: 0;
+   padding: 0;
 background-attachment: fixed;
 }
 body img {
@@ -17,17 +19,16 @@ body img {
     margin: 2em auto 2em auto;
 }
 .text-container {
-    width: 70%;
+    width: 85%;
     margin: auto;
     background-color: #303030;
-    padding: 2em;
-    border-radius: 10px;
+    padding: 1.5em 0 2em 0;
+   
 
 }
 .text-box {
     margin-bottom: 2em;
-    padding: 2em;
-    padding-top: 1em;
+    padding: 1em 0 2em 0
 }
 .title h1 {
     font-size: 50px;
@@ -37,24 +38,67 @@ body img {
     font-family: 'Oswald';
 }
 
-a {
-    color: rgb(79, 219, 102);
-}
+
 h2 {
    padding: 0em 0 0.5em 0em;
     color: rgb(199, 196, 196);
-  margin-left: -0.5em;
+
   margin-top: 0;
     font-weight: 400;
     font-size: 2.4em;
     color: rgba(255, 255, 255, 0.863);
-margin-bottom: 0.2em;
+margin-bottom: 0em;
+margin-left: 1em;
 font-family: 'Oswald';
 border-style: solid;
 border-color: rgba(200, 211, 200, 0.274);
 border-width: 0 0 1px 0px;
 display:inline-block;
 }
+.main-container {
+  display: flex;
+}
+.start-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+  padding-top: 10em;
+  padding-right: 5em;
+}
+.logo-container img {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+ 
+}
+.logo-title, .logo-subtitle {
+  line-height: 50px;
+  height: 50%;
+  color: rgb(187, 187, 187);
+  font-family: Montserrat;
+}
+.logo-title {
+  font-size: 2.2em;
+  padding-left: 0.1em;
+}
+.logo-subtitle {
+  height: 50%;
+  font-size: 3em;
+
+}
+
+.logo-image-container {
+  width: 100px;
+  height: 100px;
+  padding-right: 1em
+}
+.logo-container {
+  display: flex;
+  text-align: left;
+  justify-content: center;
+}
+
 .code-flow {
     display: flex;
     align-items: center;
@@ -80,6 +124,70 @@ display:inline-block;
 .links a {
     margin: 1em;
 }
+.basics-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+  padding-top: 12em;
+}
+.basics-title {
+  text-align: left;
+  color: rgb(187, 187, 187);
+  text-decoration: none;
+  font-family: Montserrat;
+  font-size: 1.2em;
+}
+.basics-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+ 
+}
+.basics-link {
+  text-align: center;
+width: 18%;
+border-width: 0 1px 0 0;
+border-style: solid;
+border-color: rgb(87, 86, 86);
+}
+.basics-link:last-child {
+  border-width: 0px;
+  width: 27%;
+} 
+.basics-link a {
+  color: rgba(187, 187, 187, 0.719);
+  text-decoration: none;
+  font-family: Roboto;
+  font-size: 1em;
+  transition: 0.2s;
+ 
+  font-weight: 100;
+}
+.basics-link a:hover {
+  color: white;
+ 
+}
+.arrow {
+ padding-top: 8em;
+  
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.arrow img {
+  opacity: 0.6;
+}
+.arrow img:hover {
+  opacity: 1;
+}
+.arrow a {
+  display: inline-block;
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+}
+
 .important {
     font-size: 1.2em;
    
@@ -94,15 +202,37 @@ h3 {
     color:rgba(200, 211, 200, 0.808);
     font-family: 'Oswald';
     font-weight: 100;
+    padding: 0.6em 0em 0.6em 2.2em;
+    cursor: pointer;
+    margin: 0.5em 0 0.5em 0;
+    
+}
+ul {
+  padding-left: 6em;
+  padding-right: 3em;
+  display: none;
+}
+pre {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+}
+h3:hover {
+  background-color:  #3f3f3f;
+  transition: 0.2s;
+ 
+ 
 }
 .language-css {
     margin-top: 1em !important;
     margin-bottom: 1em !important;
 }
 .navigation-container {
-    width: 100%;
+    width: 15%;
     position: relative;
-
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    border-color: rgba(82, 82, 82, 0.876);
+  
 }
 .navigation {
     position: absolute;
@@ -111,32 +241,121 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items:top;
-    margin-top: 5em;
+    margin-top: 1em;
     position: fixed;
     margin-left: 1em;
     padding-left: 0.7em;
     border-style: solid;
-    border-width: 0 0 0 2px;
+    border-width: 0 0 0 0px;
     border-color: rgba(255, 255, 255, 0.438);
     padding-top: -0.6em;
+    justify-content: space-evenly;
+    height: 95%;
+    
 }
 .navigation a {
     text-decoration: none;
     color:rgba(200, 211, 200, 0.658);
-    font-family: Oswald;
-   
+    font-family: Roboto;
+   display: flex;
+  
     
 }
 .navigation a:hover {
     color:rgba(200, 211, 200, 0.856);
 }
-
+.navigation  a div{
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1em;
+  padding-right: 0.4em;
+}
 form {
     padding: 1em;
     display: flex;
 }
 .formcolumn {
     width: 50%;
+}
+
+.closed .vertical {
+    transition: all 0.5s ease-in-out;
+    transform: rotate(-90deg);
+    
+  }
+  .closed .horizontal {
+    transition: all 0.5s ease-in-out;
+    transform: rotate(-90deg);
+    opacity: 1;
+  }
+  .visible {
+    display: block !important;
+    opacity: 1;
+  }
+  .opened {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  .opened .vertical {
+    transition: all 0.5s ease-in-out;
+    transform: rotate(90deg);
+  }
+  .opened .horizontal {
+    transition: all 0.5s ease-in-out;
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  .always-visible {
+    display: block !important;
+    opacity: 1 !important;;
+  }
+  .circle-plus {
+    height: 2.5em;
+    width: 2.5em;
+    margin-left: 15px;
+    font-size: 0.4em;
+    opacity: 0.8;
+    cursor: pointer; 
+    display: inline-block;
+  }
+  
+  .circle-plus .circle {
+    position: relative;
+    width: 2.55em;
+    height: 2.5em;
+    border-radius: 100%;
+   background-color: white;
+  }
+  
+  .circle-plus .circle .horizontal {
+    position: absolute;
+    background-color: rgb(90, 131, 179);
+    width: 15px;
+    height: 2.5px;
+    left: 50%;
+    margin-left: -8px;
+    top: 80%;
+    margin-top: -7px;
+  }
+  
+  .circle-plus .circle .vertical {
+    position: absolute;
+    background-color: rgb(90, 131, 179);
+width: 2.5px;
+height: 15px;
+left: 50%;
+margin-left: -2px;
+top: 50%;
+margin-top: -7px;
+  }
+
+.bonus {
+   display: none;
+   margin-left: 2em;
+}
+.section-title {
+    font-size: 1.8em;
+    color:rgba(200, 211, 200, 0.808);
+    font-family: 'Oswald';
+    font-weight: 100;
 }
 @media only screen and (max-width: 1700px) {
     .navigation {
